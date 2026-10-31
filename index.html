@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="ふたりの冷蔵庫を管理する、冷蔵庫メモのUIプレビュー。"><title>冷蔵庫メモ｜UIプレビュー</title><style>:root{color-scheme:light;--bg:#ffffff;--surface:#ffffff;--ink:#171717;--secondary:#525252;--muted:#737373;--line:#e5e5e5;--subtle:#fafafa;--soft:#f5f5f5;--strong:#404040;--control-line:#d4d4d4;--hover:#ebebeb;--avatar:#e5e5e5;--on-primary:#ffffff;--accent:#171717;--error:#b91c1c;--warning:#b45309;--radius:12px}:root[data-theme="dark"]{color-scheme:dark;--bg:#202124;--surface:#28292c;--ink:#f0f0f0;--secondary:#c1c3c7;--muted:#a5a8ad;--line:#424449;--subtle:#242528;--soft:#34363a;--strong:#d7d9dc;--control-line:#62656b;--hover:#404247;--avatar:#424449;--on-primary:#202124;--accent:#f0f0f0;--error:#fca5a5;--warning:#f4b566}*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:14px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans JP','Yu Gothic UI',Meiryo,sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none;touch-action:manipulation}button, input, select{min-height:44px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ink);outline-offset:3px}button:disabled{cursor:not-allowed}h1,h2,h3{line-height:1.35;text-wrap:balance}p{margin:0;text-wrap:pretty}svg{display:block;width:20px;height:20px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}[hidden]{display:none!important}.app-header{height:88px;max-width:1152px;margin:auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:600}.brand svg{width:24px;height:28px}.main-nav{display:flex;gap:8px}.main-nav button{display:flex;gap:8px;align-items:center;padding:0 14px;font-size:13px;color:var(--secondary);border-radius:8px}.main-nav button.active{background:var(--soft);color:var(--ink);font-weight:600}.main-nav button:hover{background:var(--soft)}.top-line{border-bottom:1px solid var(--line)}main{max-width:1152px;margin:auto;padding:26px 32px 64px}.preview{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--secondary);margin-bottom:44px}.preview svg{width:15px;height:15px;color:var(--muted)}.preview .tag{background:var(--soft);color:var(--secondary);padding:2px 8px;border-radius:5px;font-size:11px}.page-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:32px}.eyebrow{display:flex;align-items:center;gap:6px;color:var(--secondary);font-size:12px;margin-bottom:12px}.eyebrow svg{width:15px;height:15px}h1{margin:0 0 12px;font-size:32px;font-weight:600}.subtitle{font-size:14px;color:var(--secondary)}.primary{display:inline-flex;justify-content:center;align-items:center;gap:8px;background:var(--ink);color:var(--on-primary);border:1px solid var(--ink);border-radius:8px;padding:0 18px;min-height:44px;font-weight:500;white-space:nowrap}.primary:hover{background:var(--strong);border-color:var(--strong)}.primary svg{width:18px;height:18px}.secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--control-line);border-radius:8px;background:var(--surface);font-size:13px}.secondary:hover{background:var(--subtle)}.stats{display:flex;gap:0;padding:24px 0 28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:32px}.stat{flex:1;padding:0 28px;border-left:1px solid var(--line)}.stat:first-child{border-left:0;padding-left:0}.stat small{display:block;color:var(--secondary);font-size:12px}.stat strong{display:flex;gap:8px;align-items:baseline;margin-top:8px;font-size:28px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums}.stat strong span{font-size:12px;font-weight:400;color:var(--muted)}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:48px}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:22px;justify-content:space-between}.filters{display:flex;background:var(--soft);padding:4px;border-radius:10px;gap:4px}.filters button{padding:0 12px;border-radius:7px;color:var(--secondary);font-size:12px;min-height:36px}.filters button.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px #0000000d;font-weight:600}.filters button:hover:not(.active){background:var(--hover)}.search-wrap{position:relative;display:block;flex:1;min-width:150px;max-width:220px}.search-wrap svg{position:absolute;left:12px;top:12px;width:18px;height:18px;color:var(--muted);pointer-events:none}.search{width:100%;background:var(--surface);border:1px solid var(--control-line);border-radius:8px;padding:10px 12px 10px 38px;font-size:13px}.search::placeholder{color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.section-label{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;color:var(--secondary);font-size:12px}.section-label span:first-child{font-weight:600;color:var(--ink)}.section-label .sort{display:flex;align-items:center;gap:5px}.section-label svg{width:14px;height:14px}#list{border-top:1px solid var(--line)}.food{display:grid;grid-template-columns:40px minmax(0,1fr) auto 44px;gap:14px;align-items:center;min-height:96px;border-bottom:1px solid var(--line);padding:18px 0}.food-icon{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--subtle);color:var(--secondary)}.food-icon svg{width:21px;height:21px}.food-info{min-width:0}.food-info h3{font-size:14px;font-weight:600;margin:0 0 5px;overflow-wrap:anywhere}.food-info p{color:var(--secondary);font-size:12px}.deadline{text-align:right;border-radius:6px;padding:6px 0 6px 10px;font-variant-numeric:tabular-nums;min-width:112px}.deadline strong{display:flex;justify-content:flex-end;align-items:center;gap:6px;font-size:12px;font-weight:500}.deadline strong svg{width:14px;height:14px}.deadline small{display:block;color:var(--secondary);font-size:11px;margin-top:5px}.deadline:hover small{text-decoration:underline}.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#a3a3a3}.deadline.red{color:var(--warning)}.deadline.red .status-dot{background:var(--warning)}.deadline.amber .status-dot{background:var(--strong)}.complete{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--control-line);border-radius:8px;color:var(--secondary)}.complete svg{width:18px;height:18px}.complete:hover{background:var(--soft);color:var(--ink);border-color:var(--muted)}.side-note{padding-top:4px}.side-note h2{font-size:13px;font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:8px}.side-note h2 svg{width:16px;height:16px}.side-note p{font-size:12px;color:var(--secondary);line-height:1.9}.side-note section+section{margin-top:28px}.mini-rule{height:1px;background:var(--line);margin:28px 0}.member-summary{display:flex;align-items:center;gap:8px;margin-bottom:10px}.avatars{display:flex;padding-right:4px}.avatars span{width:26px;height:26px;display:grid;place-items:center;border:2px solid var(--surface);border-radius:50%;background:var(--line);font-size:10px}.avatars span+span{margin-left:-5px;background:var(--soft)}.member-summary small{font-size:12px;color:var(--secondary)}.text-button{display:inline-flex;align-items:center;gap:7px;text-decoration:underline;text-underline-offset:4px;color:var(--ink);font-size:12px;padding:0}.text-button svg{width:14px;height:14px}.note{font-size:11px;color:var(--secondary);line-height:1.9;max-width:680px;margin-top:24px}.footer{display:flex;justify-content:space-between;gap:16px;align-items:center;border-top:1px solid var(--line);margin-top:48px;padding-top:20px;color:var(--secondary);font-size:11px}.footer span{display:flex;gap:6px;align-items:center}.footer svg{width:14px;height:14px}.panel{padding:24px 0;border-top:1px solid var(--line)}.panel h2{font-size:16px;font-weight:600;margin:0 0 16px}.panel p{font-size:13px;color:var(--secondary)}.member{display:flex;align-items:center;gap:12px;padding:14px 0}.member small{margin-left:auto;color:var(--secondary);font-size:12px}.avatar{display:grid;place-items:center;width:36px;height:36px;background:var(--soft);border:1px solid var(--line);border-radius:50%;font-size:12px}.member b{font-size:14px;font-weight:500}.hint{font-size:12px;color:var(--secondary);line-height:1.8;margin:8px 0 0}.settings-layout{max-width:720px}.settings-note{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--subtle);display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--secondary);margin:24px 0}.settings-note svg{width:16px;height:16px;margin-top:2px}.empty{text-align:center;padding:56px 20px}.empty svg{width:28px;height:28px;margin:0 auto 16px;color:var(--muted)}.empty h3{font-size:15px;font-weight:600;margin:0 0 8px}.empty p{color:var(--secondary);font-size:13px;margin-bottom:20px}.empty .primary{font-size:13px}dialog{border:1px solid var(--line);border-radius:16px;width:480px;max-width:calc(100% - 32px);padding:0;color:var(--ink);box-shadow:0 20px 25px -5px #0000001a;max-height:calc(100dvh - 40px);overflow:auto;background:var(--surface)}dialog::backdrop{background:#00000066}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 24px 12px}.dialog-head h2{font-size:20px;font-weight:600;margin:0}.close{display:grid;place-items:center;width:44px;height:44px;border-radius:8px;margin:-8px -8px -8px 0}.close:hover{background:var(--soft)}.close svg{width:18px;height:18px}.dialog-body{padding:0 24px 24px}.dialog-intro{font-size:12px;color:var(--secondary);margin:0 0 24px}label{display:block;font-size:12px;font-weight:500;margin:20px 0 8px}input,select{width:100%;min-width:0;border:1px solid var(--control-line);border-radius:8px;padding:10px 12px;background:var(--surface);color:var(--ink)}input[type=checkbox]{accent-color:var(--ink)}input:disabled{background:var(--soft);color:var(--muted);opacity:1;cursor:not-allowed}input[aria-invalid=true]{border-color:var(--error)}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.chips button{border:1px solid var(--line);border-radius:6px;padding:0 12px;min-height:36px;font-size:12px}.chips button:hover{background:var(--soft)}.form-separator{height:1px;background:var(--line);margin:24px 0}.check-label{display:flex;gap:10px;align-items:flex-start;font-weight:400;min-height:44px;padding:8px 0;margin-top:12px}.check-label input{width:16px;height:16px;min-height:16px;margin:2px 0 0;flex-shrink:0}.modal-foot{display:flex;gap:12px;justify-content:flex-end;border-top:1px solid var(--line);padding:16px 24px;background:var(--subtle);position:sticky;bottom:0}.field-error{font-size:12px;color:var(--error);margin-top:6px}.toast{position:fixed;z-index:50;bottom:calc(24px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--on-primary);border:1px solid var(--strong);border-radius:10px;padding:8px 8px 8px 16px;display:flex;gap:16px;align-items:center;max-width:calc(100% - 32px);width:max-content;font-size:13px;box-shadow:0 4px 6px -1px #0000001a}.toast button{color:var(--on-primary);text-decoration:underline;text-underline-offset:3px;padding:0 12px;white-space:nowrap}.toast-dismiss{display:grid;place-items:center;width:44px;padding:0!important}.toast-dismiss svg{width:16px;height:16px}.mobile-brand{display:none}.number{font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.workspace{grid-template-columns:minmax(0,1fr) 200px;gap:28px}.toolbar{align-items:stretch}.search-wrap{max-width:none;flex-basis:100%}.filters{width:max-content}.stats{margin-bottom:28px}}
+@media(max-width:760px){.app-header{height:72px;padding:0 20px}.brand{font-size:14px;gap:8px}.brand svg{width:20px;height:24px}.main-nav{gap:4px}.main-nav button{padding:0 10px;font-size:12px;gap:6px}.main-nav button svg{width:16px;height:16px}.main-nav button[data-page=fridge]{display:none}main{padding:20px 20px calc(40px + env(safe-area-inset-bottom))}.preview{margin-bottom:32px;font-size:11px;gap:6px;flex-wrap:wrap}.preview .tag{font-size:10px}.preview svg{display:none}.page-header{align-items:flex-start;gap:12px;margin-bottom:28px}h1{font-size:26px;margin-bottom:10px}.eyebrow{margin-bottom:10px;font-size:11px}.subtitle{font-size:12px}.page-header>.primary{font-size:12px;padding:0 12px;margin-top:29px}.page-header>.primary svg{width:16px;height:16px}.stats{padding:20px 0 24px;margin-bottom:28px}.stat{padding:0 14px}.stat small{font-size:10px;line-height:1.6}.stat strong{font-size:26px;margin-top:10px}.stat strong span{font-size:11px}.workspace{display:block}.toolbar{gap:16px;margin-bottom:20px}.search-wrap{order:-1}.filters{width:100%}.filters button{flex:1;min-height:44px;padding:0 8px;font-size:12px}.section-label{font-size:11px}.food{grid-template-columns:36px minmax(0,1fr) 96px 40px;gap:10px;min-height:96px;padding:18px 0}.food-icon{width:36px;height:36px;border-radius:8px}.food-icon svg{width:19px;height:19px}.food-info h3{font-size:13px}.food-info p{font-size:11px}.deadline{min-width:0;padding-left:0;min-height:44px}.deadline strong{font-size:11px;gap:5px}.deadline small{font-size:10px}.complete{width:44px;height:44px;margin-left:-4px}.side-note{margin-top:32px;padding:20px 0 0;border-top:1px solid var(--line)}.side-note .sharing-section,.side-note .mini-rule{display:none}.side-note section+section{margin-top:0}.side-note h2{font-size:12px}.side-note p{font-size:11px}.note{font-size:11px;margin-top:20px}.footer{margin-top:32px;font-size:10px;align-items:flex-start}.footer span:last-child{display:none}.dialog-head{padding:20px 20px 12px}.dialog-body{padding:0 20px 20px}.modal-foot{padding:16px 20px calc(16px + env(safe-area-inset-bottom))}.chips button{min-height:44px}dialog{max-height:calc(100dvh - 24px);max-width:calc(100% - 24px)}.toast{bottom:calc(16px + env(safe-area-inset-bottom))}}
+@media(max-width:380px){.app-header,main{padding-left:16px;padding-right:16px}.food{grid-template-columns:minmax(0,1fr) 92px 44px;gap:8px}.food-icon{display:none}.page-header>.primary{padding:0 10px}.page-header>.primary svg{display:none}.stat{padding:0 10px}.row{grid-template-columns:1fr}.main-nav button{padding:0 8px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.complete{width:52px;min-height:52px;height:auto;gap:1px;padding:5px 2px}.complete span{font-size:10px;line-height:1.4;white-space:nowrap}.food{grid-template-columns:40px minmax(0,1fr) auto 52px}@media(max-width:760px){.food{grid-template-columns:36px minmax(0,1fr) 88px 48px;gap:10px}.complete{width:48px;margin-left:0}.deadline strong{font-size:11px}}@media(max-width:380px){.food{grid-template-columns:minmax(0,1fr) 88px 48px;gap:8px}}
+body{background:var(--bg)}.main-nav{align-items:center}.theme-toggle{width:44px;min-width:44px;padding:0!important;justify-content:center}.theme-toggle svg{width:19px;height:19px}.theme-options{max-width:340px}.theme-options label{margin-top:0}.theme-options select{margin-bottom:10px}.deadline.red{color:var(--warning)}.deadline.red .status-dot{background:var(--warning)}.filters button.active{background:var(--surface)}.food-icon,dialog{background:var(--surface)}:root[data-theme=dark] input:disabled{color:var(--muted)}:root[data-theme=dark] .avatars span{background:var(--avatar)}:root[data-theme=dark] .avatars span+span{background:var(--soft)}.theme-control-note{font-size:12px;color:var(--secondary);line-height:1.8}
+/* Fridge interior: food illustrations sit on continuous shelves. */
+.fridge-shell{border:1px solid var(--control-line);border-radius:26px;background:var(--soft);padding:14px;box-shadow:0 12px 28px #00000006;position:relative}
+.fridge-cap{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 18px;color:var(--secondary);font-size:10px;letter-spacing:.18em}.fridge-cap span:last-child{letter-spacing:0;font-size:11px;display:flex;align-items:center;gap:8px}.fridge-cap i{display:block;width:30px;height:5px;border-radius:4px;background:var(--control-line)}
+#list{border:1px solid var(--line);border-radius:15px;background:var(--subtle);overflow:hidden;min-height:290px;padding:8px 14px 20px;box-shadow:inset 5px 0 12px #00000004}
+.shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px 0 25px;position:relative;margin-bottom:12px;isolation:isolate}.shelf:after{content:'';position:absolute;bottom:9px;left:-14px;right:-14px;height:8px;background:var(--surface);border-top:1px solid var(--control-line);border-bottom:1px solid var(--line);box-shadow:0 7px 9px #00000007;z-index:-1}.shelf:last-child{margin-bottom:0}
+.food{display:flex;flex-direction:column;gap:0;min-height:246px;padding:0;border:0;position:relative;text-align:center;min-width:0;justify-content:flex-end}
+.food-picture{position:relative;display:grid;place-items:center;width:100%;min-height:116px;border-radius:12px;padding:4px 0;margin-bottom:4px}.food-picture:hover{background:var(--soft)}.food-picture:after{content:'';position:absolute;bottom:9px;width:60px;height:6px;background:#00000009;border-radius:50%;z-index:-1}.food-art{width:100px;height:100px;stroke:none;fill:none;overflow:visible;filter:saturate(.78)}
+.food-info h3{font-size:13px;margin:0 0 3px}.food-info p{font-size:10px}.food-info p:last-child{color:var(--muted)}.food-info{width:100%}
+.deadline{padding:5px 4px;min-height:44px;text-align:center;min-width:0;margin:4px 0 2px}.deadline strong{justify-content:center;font-size:11px}.deadline small{font-size:10px;margin-top:0}.status-dot{display:none}.complete{border:0;display:flex;gap:5px;width:auto;min-height:36px;height:36px;padding:0 10px;margin:0;border-radius:6px}.complete svg{width:14px;height:14px}.complete span{font-size:10px}.food-mark{position:absolute;right:calc(50% - 51px);top:8px;font-size:24px;font-weight:500;line-height:1;color:#937454}.food-mark.expired{font-size:18px;width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:var(--surface);border:1px solid var(--control-line);color:var(--warning)}.fresh-mark{position:absolute;top:9px;right:calc(50% - 52px);color:#8aab9d;font-size:22px}.fresh-mark:after{content:'✧';font-size:13px;position:absolute;top:22px;right:-5px}
+.fridge-legend{display:flex;flex-wrap:wrap;gap:16px;padding:14px 6px 3px;font-size:10px;color:var(--secondary);align-items:center}.fridge-legend b{font-size:15px;font-weight:500;margin-right:5px;color:#937454}.fridge-legend .fresh{color:#8aab9d}.fridge-shell .empty{padding-top:70px}.section-label{margin-bottom:14px}.side-note{padding-top:6px} .side-note .legend-note{margin-top:12px}
+@media(max-width:760px){.fridge-shell{padding:10px;border-radius:22px}.fridge-cap{padding:9px 9px 15px}.shelf{gap:6px}.food{min-height:235px}.food-art{width:90px;height:90px}.food-picture{min-height:105px}.food-info h3{font-size:12px}.complete{width:auto;margin:0}.deadline{padding:5px 0}.food-mark,.fresh-mark{right:calc(50% - 43px)}.fridge-legend{gap:12px;font-size:10px}}
+@media(max-width:480px){.shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px;padding-bottom:25px}.food{min-height:242px}.food-art{width:100px;height:100px}.food-picture{min-height:112px}.food-info h3{font-size:13px}.food-mark,.fresh-mark{right:calc(50% - 48px)}.fridge-legend{gap:8px 14px}.fridge-cap span:last-child{font-size:10px}}
+
+/* Appliance-first layout, with supporting information to the side. */
+.app-header{height:68px}main{padding-top:22px}#fridge>.page-header{margin-bottom:20px;align-items:center}#fridge h1{font-size:22px;margin:0;letter-spacing:.02em}#fridge>.page-header>.primary{margin-top:0;font-size:12px}.workspace{gap:32px;grid-template-columns:minmax(0,1fr) 224px}.toolbar{margin-bottom:16px;gap:12px}.search-wrap{flex-basis:auto;max-width:210px}.filters button{font-size:11px;padding:0 10px}.stats{display:block;border:0;padding:0;margin:0 0 28px}.stat,.stat:first-child{padding:14px 0;display:flex;align-items:center;justify-content:space-between;border:0;border-bottom:1px solid var(--line)}.stat strong{font-size:22px;margin:0;gap:5px}.stat small{font-size:11px}.stat strong span{font-size:10px}.side-note{padding-top:58px}.side-note section p{font-size:11px}.side-note h2{font-size:12px}.preview{margin:16px 0 0;font-size:10px}.preview .tag{font-size:10px}.footer{margin-top:28px}.note{margin-top:18px;font-size:10px}
+.fridge-shell{padding:0 24px 0 16px;border-radius:24px 24px 18px 18px;border:1px solid var(--control-line);background:linear-gradient(105deg,var(--soft),var(--surface) 46%,var(--soft));box-shadow:inset 1px 1px 0 #ffffff18,0 8px 24px #00000008;position:relative}.fridge-shell:after{content:'';position:absolute;right:9px;top:80px;bottom:77px;width:5px;border-radius:5px;background:var(--control-line);box-shadow:inset 1px 0 2px #00000016}.fridge-cap{height:62px;padding:0 10px;gap:16px}.appliance-brand{font-size:9px;letter-spacing:.22em;color:var(--muted)}.fridge-cap .appliance-room{font-size:10px;letter-spacing:.03em}.fridge-cap i{width:22px;height:4px}.fridge-shell #list{padding:0 14px 8px;border-radius:12px;background:var(--subtle);box-shadow:inset 3px 0 8px #00000008;min-height:240px}
+.shelf{padding:8px 0 12px;gap:12px;margin-bottom:0}.shelf:after{top:125px;bottom:auto;height:7px;background:var(--surface);box-shadow:0 4px 7px #0000000a}.food{min-height:232px;justify-content:flex-start}.food-picture{height:118px;min-height:118px;margin:0 0 14px;align-items:end;padding:0 0 7px}.food-art{height:100px;width:100px}.food-picture:after{bottom:5px}.food-info h3{font-size:13px}.food-info p{font-size:10px}.deadline{margin-top:3px;margin-bottom:0}.complete{min-height:32px;height:32px}.food-mark{right:calc(50% - 20px);top:42px;font-size:26px;color:#795c52;text-shadow:0 1px 1px #ffffff20;transform:rotate(-11deg)}.food-mark.expired{top:44px;right:calc(50% - 14px);font-size:17px;background:#e9e3d6cc;color:#865c40;border-color:#a48c7840}.fresh-mark{top:20px;right:calc(50% - 42px)}
+.appliance-base{height:60px;position:relative;margin:14px -24px 0 -16px;border-top:1px solid var(--control-line);border-radius:0 0 18px 18px;box-shadow:inset 0 2px 2px #00000004}.appliance-base span{position:absolute;top:10px;left:36%;right:36%;height:5px;background:var(--control-line);border-radius:0 0 4px 4px;box-shadow:inset 0 1px 2px #00000016}.appliance-base i{position:absolute;bottom:10px;left:22px;right:22px;height:2px;border-radius:3px;background:var(--line)}.fridge-legend{padding:10px 4px 0;gap:16px;font-size:10px}.fridge-legend b{font-size:14px}
+@media(max-width:1000px){.workspace{grid-template-columns:minmax(0,1fr) 195px;gap:24px}.toolbar .search-wrap{max-width:none;flex-basis:100%}.toolbar{gap:8px}.side-note{padding-top:104px}}
+@media(max-width:760px){.app-header{height:60px}main{padding:18px 16px 30px}#fridge>.page-header{margin-bottom:16px;gap:10px}#fridge h1{font-size:20px}.workspace{display:block}.toolbar{gap:10px;margin-bottom:14px;flex-wrap:nowrap}.toolbar .search-wrap{order:0;flex:1;min-width:100px;max-width:170px}.filters{width:auto;flex-shrink:0}.filters button{padding:0 9px;min-height:40px;font-size:11px}.search{font-size:12px;min-height:44px}.side-note{padding-top:0;margin-top:22px;border-top:0}.stats{display:flex;margin-bottom:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.stat,.stat:first-child{display:block;flex:1;padding:14px 8px;border-bottom:0}.stat strong{margin-top:7px;font-size:22px}.stat small{font-size:10px}.side-note section{max-width:500px}.side-note p{font-size:11px}.fridge-shell{padding:0 21px 0 11px;border-radius:22px 22px 16px 16px}.fridge-shell:after{right:7px;width:4px}.fridge-cap{height:52px;padding:0 8px}.appliance-base{height:48px;margin-left:-11px;margin-right:-21px}.appliance-base span{height:4px}.shelf{gap:10px}.food-mark{right:calc(50% - 20px);top:42px}.food-mark.expired{right:calc(50% - 14px)}.fresh-mark{right:calc(50% - 42px);top:20px}.fridge-legend{gap:10px}.preview{margin-top:12px}.footer{margin-top:22px}}
+@media(max-width:480px){.toolbar{flex-wrap:wrap}.toolbar .search-wrap{order:0;flex-basis:100%;max-width:none}.toolbar .filters{width:100%}.filters button{flex:1}.shelf{gap:10px}.food{min-height:230px}.fridge-shell #list{padding-left:10px;padding-right:10px}.shelf:after{left:-10px;right:-10px}.food-mark{right:calc(50% - 20px)}.food-mark.expired{right:calc(50% - 14px)}.fridge-legend{font-size:9px;gap:8px}.fridge-legend b{margin-right:3px}}
+.gloss-swatch{display:inline-block;vertical-align:middle;width:15px;height:15px;border-radius:50%;margin-right:5px;background:#a8b69b;position:relative}.gloss-swatch:before{content:"";position:absolute;width:3px;height:7px;left:4px;top:2px;background:#fffdf5;border-radius:70% 30% 60% 20%;transform:rotate(25deg)}.food-info p:last-child{color:var(--secondary)}
+/* Continuous glass shelves, each with a shallow storage bay above it. */
+.fridge-shell{padding-left:18px;padding-right:27px;box-shadow:inset 2px 1px 0 #ffffff20,0 9px 24px #0000000a}.fridge-shell #list{padding:0 16px 10px;border:1px solid var(--control-line);box-shadow:inset 6px 0 10px #00000008,inset -4px 0 8px #00000005;background:var(--subtle)}.shelf{padding-top:8px;padding-bottom:16px;gap:10px;margin:0}.shelf:before{content:'';position:absolute;top:0;height:124px;left:-16px;right:-16px;background:linear-gradient(180deg,var(--soft),var(--subtle) 35%,var(--subtle) 85%,var(--soft));border-top:1px solid var(--line);z-index:-2}.shelf:first-child:before{border-top:0}.shelf:after{top:124px;left:-16px;right:-16px;height:10px;background:linear-gradient(180deg,var(--surface) 0 35%,var(--soft) 35% 100%);border-top:2px solid var(--control-line);border-bottom:1px solid var(--control-line);box-shadow:0 5px 5px #0000000c;z-index:-1}.food{min-height:220px}.food-picture{margin-bottom:16px;height:118px;min-height:118px;padding-bottom:0;align-items:end}.food-picture .food-art{transform:translateY(7px)}.food-picture:after{bottom:-1px;width:64px;background:#0000000b}.food-info h3{font-size:12px;margin-bottom:2px}.food-info p{line-height:1.5;font-size:10px}.deadline{padding:3px 0;min-height:39px;margin-top:3px}.deadline strong{font-size:11px}.complete{min-height:32px;height:32px;padding:0 11px;gap:5px;border:1px solid var(--line);background:var(--surface);border-radius:6px;font-size:11px;margin-top:3px}.complete:hover{border-color:var(--control-line)}.complete span:last-child{font-size:12px;color:var(--muted)}.food-mark{top:49px}.food-mark.expired{top:51px}.appliance-base{margin-left:-18px;margin-right:-27px}.filters button{white-space:nowrap;word-break:keep-all;overflow-wrap:normal;line-height:1.4}.filters button[data-filter=over]{white-space:normal}.phrase{display:inline-block;white-space:nowrap;word-break:keep-all}.usage-options{display:grid;gap:12px;margin-top:18px}.usage-options button{display:flex;align-items:center;gap:16px;border:1px solid var(--control-line);border-radius:12px;padding:16px;text-align:left;background:var(--subtle);min-height:82px}.usage-options button:hover{background:var(--soft)}.usage-options b{display:block;font-size:14px;font-weight:600}.usage-options small{display:block;color:var(--secondary);font-size:11px;margin-top:4px}.portion-icon{font-size:30px;line-height:1;color:var(--secondary)}.usage-remaining{font-size:12px;color:var(--secondary)}
+@media(max-width:760px){.fridge-shell{padding-left:12px;padding-right:22px}.fridge-shell #list{padding-left:12px;padding-right:12px}.shelf:before,.shelf:after{left:-12px;right:-12px}.appliance-base{margin-left:-12px;margin-right:-22px}.food{min-height:220px}.filters button{padding-left:8px;padding-right:8px;min-width:0}.food-info h3{font-size:12px}.food-mark{top:49px}.food-mark.expired{top:51px}.shelf{gap:8px}.complete{width:auto;margin-top:3px;padding:0 10px}}
+@media(max-width:380px){.filters button{font-size:10px;padding:3px 6px}.food-info p{font-size:9px}.usage-options small{font-size:10px}}
+.condition-crease{stroke:#7c7667;stroke-width:1.15}.condition-crease.over{stroke:#796d64;stroke-width:1.25}.condition-key{display:inline-block;vertical-align:middle;width:18px;height:18px;margin-right:3px;fill:none;stroke:#7c7667;stroke-width:1.25}.condition-key.over{stroke:#796d64;stroke-width:1.45}:root[data-theme=dark] .condition-crease,:root[data-theme=dark] .condition-key{stroke:#c0b6a3}:root[data-theme=dark] .condition-crease.over,:root[data-theme=dark] .condition-key.over{stroke:#c8b4a5}/* ステータスバーとの重なり回避: 端末の上端セーフエリア分だけ全体を下げる（デスクトップでは0） */
+body{padding-top:env(safe-area-inset-top,0px)}
+</style><script>(()=>{let p='system';try{p=localStorage.getItem('fridge-theme')||'system'}catch{}if(!['system','light','dark'].includes(p))p='system';const dark=p==='dark'||p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=dark?'dark':'light'})();</script></head><body><div class="top-line"><header class="app-header"><div class="brand"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14M9 5v2M9 13v4"/></svg><span>冷蔵庫メモ</span></div><nav class="main-nav" aria-label="メインメニュー"><button class="theme-toggle" id="theme-toggle" aria-label="配色を切り替える" title="配色を切り替える"></button><button class="active" data-page="fridge" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>冷蔵庫</button><button data-page="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--surface)"/><circle cx="15" cy="17" r="3" fill="var(--surface)"/></svg>共有・設定</button></nav></header></div><main><section id="fridge" aria-labelledby="fridge-title"><header class="page-header"><div><h1 id="fridge-title">ふたりの冷蔵庫</h1></div><button class="primary" id="add"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>食品を追加</button></header><div class="workspace"><div class="inventory"><div class="toolbar"><div class="filters" aria-label="表示する食品"><button class="active" data-filter="all" aria-pressed="true">すべて</button><button data-filter="soon" aria-pressed="false">もうすぐ</button><button data-filter="over" aria-pressed="false"><span class="phrase">目安を</span><wbr><span class="phrase">過ぎた</span></button></div><label class="search-wrap" style="margin:0"><span class="sr-only">食品を検索</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input class="search" id="search" type="search" placeholder="食品を検索" autocomplete="off"></label></div><div class="fridge-shell"><div class="fridge-cap"><span class="appliance-brand">FRIDGE MEMO</span><span class="appliance-room">冷蔵室 <i aria-hidden="true"></i></span></div><div id="list" role="list" aria-label="冷蔵庫の棚の食品一覧"></div><div class="appliance-base" aria-hidden="true"><span></span><i></i></div></div><div class="fridge-legend" aria-label="マークの意味"><span><svg class="condition-key soon" viewBox="48 36 26 25" aria-hidden="true"><path d="M56 40q-1 6-2 13M64 41q-1 6-2 13M52 46q7-1 15-2M51 51q7-1 15-2"/></svg>今日〜2日以内</span><span><svg class="condition-key over" viewBox="48 36 26 25" aria-hidden="true"><path d="M61 40q-.5 5-1 10M59.7 54h.2"/></svg>目安を過ぎた</span><span><i class="gloss-swatch" aria-hidden="true"></i>ツヤ：購入から1日以内</span></div></div><aside class="side-note" aria-label="使い方と共有"><div class="stats" aria-label="在庫の概要"><div class="stat"><small>冷蔵庫にある食品</small><strong id="total">0</strong></div><div class="stat"><small>今日から2日以内</small><strong id="soon">0</strong></div><div class="stat"><small>目安を過ぎた食品</small><strong id="over">0</strong></div></div><section><h2><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>使い切り目安について</h2><p>購入日をもとに目安を設定します。開封・カットしたときや、表示の期限に合わせて変更できます。</p><p style="margin-top:12px">棚のイラストや日付を押すと、その食品を編集できます。</p></section><div class="mini-rule"></div><section class="sharing-section"><h2><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M21 21v-3a6 6 0 0 0-3-5"/></svg>ふたりで共有</h2><div class="member-summary"><div class="avatars" aria-hidden="true"><span>私</span><span>彼</span></div><small>あなたとパートナー</small></div><p>登録した食品や変更は、本番では2人の画面に反映されます。</p><button class="text-button" id="sharing-link" style="margin-top:8px">共有設定を見る<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></section></aside></div><footer class="footer"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/></svg>プレビューの日数は、表示確認用の仮データです。</span><span>冷蔵のみ</span></footer><div class="preview"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/></svg><span class="tag">UIプレビュー</span><span>サンプルデータ · 変更はこの端末に保存されます</span></div></section><section id="settings" hidden aria-labelledby="settings-title"><header class="page-header"><div><div class="eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--surface)"/><circle cx="15" cy="17" r="3" fill="var(--surface)"/></svg>冷蔵庫メモ</div><h1 id="settings-title">共有・設定</h1><p class="subtitle">同じ在庫を、ふたりで管理。</p></div><button class="secondary" id="back-fridge">冷蔵庫に戻る</button></header><div class="settings-layout"><div class="panel"><h2>クラウド同期</h2><p>Googleアカウントでログインすると、この端末のデータをクラウドに保存し、ブラウザとアプリで同じデータを使えます。ログインしなくても、これまで通りこの端末内だけで使えます。</p><p class="hint" id="sync-status">未ログインです。データはこの端末内にのみ保存されています。</p><button class="secondary" id="sync-auth" style="margin-top:12px">Googleでログイン</button> <button class="secondary" id="sync-now" style="margin-top:12px" hidden>今すぐ同期</button><div id="household-area" hidden><hr style="border:none;border-top:1px solid var(--line);margin:16px 0"><p style="margin:0 0 4px"><b>ふたりで共有</b></p><p class="hint" id="hh-status"></p><button class="secondary" id="hh-create" style="margin-top:8px">冷蔵庫を作成して共有する</button><span id="hh-join-wrap" style="margin-top:8px"><input id="hh-code" type="text" placeholder="招待コード" autocomplete="off" style="padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);margin:8px 6px 0 0;text-transform:uppercase"><button class="secondary" id="hh-join">コードで参加</button></span><button class="secondary" id="hh-invite" style="margin-top:8px" hidden>招待コードを発行</button><button class="secondary" id="hh-leave" style="margin-top:8px" hidden>この冷蔵庫から抜ける</button></div></div><div class="panel"><h2>表示モード</h2><div class="theme-options"><label for="theme-select">配色</label><select id="theme-select"><option value="system">端末の設定に合わせる</option><option value="light">ライト</option><option value="dark">ダーク（濃グレー）</option></select><p class="theme-control-note" id="theme-status" role="status"></p><p class="hint">配色はこの端末に保存します。上部のボタンからもライト・ダークを切り替えられます。</p></div></div><div class="settings-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/></svg><p>Googleログインと端末間の同期は、上の「クラウド同期」から使えます。招待・メンバー共有は、まだ接続していません。</p></div><div class="panel"><h2>冷蔵庫のメンバー</h2><div class="member"><span class="avatar" aria-hidden="true">私</span><b>あなた</b><small>作成者</small></div><div class="member"><span class="avatar" aria-hidden="true">彼</span><b>パートナー</b><small>参加者の表示例</small></div><p class="hint">各自のGoogleアカウントでログインし、最大2人で共有します。招待とメンバー解除は作成者が行います。</p></div><div class="panel"><h2>食品ごとの標準日数</h2><p>保存日数の設定は、ふたりで共有します。</p><p class="hint">食品の編集で「次回の標準日数も変更する」を選ぶと、今後の登録に反映します。今回の食品だけ日付を変えることもできます。</p></div><div class="panel"><h2>プレビューのデータ</h2><p>この端末内で、食品の追加・編集・使い切った操作を試せます。</p><button class="secondary" id="reset" style="margin-top:20px">サンプルデータに戻す</button></div></div></section></main><dialog id="editor" aria-labelledby="modal-title" aria-describedby="modal-description"><form id="form" novalidate><div class="dialog-head"><h2 id="modal-title">食品を追加</h2><button type="button" class="close" aria-label="閉じる" id="close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="dialog-body"><p class="dialog-intro" id="modal-description">食品を選び、使い切り目安を確認してください。</p><label for="name">食品名 <span class="hint">（必須）</span></label><input id="name" list="catalog" required maxlength="50" placeholder="例：キャベツ" autocomplete="off" autofocus aria-describedby="name-error"><p class="field-error" id="name-error" hidden></p><datalist id="catalog"></datalist><div class="chips" id="chips" aria-label="よく使う食品"></div><label for="state">食品の状態</label><select id="state"><option>未開封・そのまま</option><option>開封済み</option><option>カット済み</option></select><div class="row"><div><label for="purchase">購入日 <span class="hint">（必須）</span></label><input id="purchase" type="date" required aria-describedby="purchase-error"><p class="field-error" id="purchase-error" hidden></p></div><div><label for="changed">開封・カットした日</label><input id="changed" type="date" disabled aria-describedby="changed-help changed-error"><p class="hint" id="changed-help">開封済み・カット済みの場合に入力</p><p class="field-error" id="changed-error" hidden></p></div></div><div class="form-separator"></div><label for="days">使い切り目安までの日数 <span class="hint">（必須）</span></label><input id="days" type="number" min="0" max="365" required placeholder="日数を入力" inputmode="numeric" aria-describedby="source days-error"><p id="source" class="hint"></p><p class="field-error" id="days-error" hidden></p><label for="due">使い切り目安の日付 <span class="hint">（必須）</span></label><input id="due" type="date" required aria-describedby="due-help due-error"><p class="hint" id="due-help">日数・日付のどちらからでも変更できます。購入日、または開封・カットした日が基準です。</p><p class="field-error" id="due-error" hidden></p><label class="check-label"><input id="remember" type="checkbox"><span>次回の標準日数も変更する<br><span class="hint">ふたりの冷蔵庫で共通の設定になります。</span></span></label></div><div class="modal-foot"><button type="button" class="secondary" id="cancel">キャンセル</button><button class="primary" type="submit">保存する</button></div></form></dialog><dialog id="reset-dialog" role="alertdialog" aria-labelledby="reset-title" aria-describedby="reset-description"><div class="dialog-head"><h2 id="reset-title">サンプルデータに戻しますか？</h2></div><div class="dialog-body"><p id="reset-description">追加・編集したプレビューの食品と標準日数を消して、最初の状態に戻します。この操作は取り消せません。</p></div><div class="modal-foot"><button class="secondary" id="reset-cancel" autofocus>キャンセル</button><button class="primary" id="reset-confirm">元のデータに戻す</button></div></dialog><dialog id="usage" aria-labelledby="usage-title"><div class="dialog-head"><h2 id="usage-title">食品を使う</h2><button type="button" class="close" id="usage-close" aria-label="使用量の選択を閉じる">×</button></div><div class="dialog-body"><p class="usage-remaining" id="usage-remaining"></p><div class="usage-options"><button type="button" id="usage-half"><span class="portion-icon" aria-hidden="true">◐</span><span><b>半分使う</b><small>今残っている量の半分を使う</small></span></button><button type="button" id="usage-all"><span class="portion-icon" aria-hidden="true">○</span><span><b>使い切る</b><small>残りをすべて使って、棚から外す</small></span></button></div></div></dialog><div class="toast" id="toast" hidden><span id="toast-text" role="status" aria-live="polite"></span><button id="undo" hidden>取り消す</button><button class="toast-dismiss" id="toast-dismiss" aria-label="通知を閉じる"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><script>
+const $=id=>document.getElementById(id);
+const iconPaths={"fridge":"<rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"2\"/><path d=\"M5 10h14M9 5v2M9 13v4\"/>","grid":"<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/>","settings":"<path d=\"M4 7h16M4 17h16\"/><circle cx=\"9\" cy=\"7\" r=\"3\" fill=\"white\"/><circle cx=\"15\" cy=\"17\" r=\"3\" fill=\"white\"/>","plus":"<path d=\"M12 5v14M5 12h14\"/>","search":"<circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"m16 16 4.5 4.5\"/>","users":"<circle cx=\"9\" cy=\"8\" r=\"3\"/><path d=\"M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M21 21v-3a6 6 0 0 0-3-5\"/>","clock":"<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>","check":"<path d=\"m5 12 4 4L19 6\"/>","close":"<path d=\"m6 6 12 12M18 6 6 18\"/>","info":"<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v6M12 7v.1\"/>","arrow":"<path d=\"M4 12h16m-6-6 6 6-6 6\"/>","sort":"<path d=\"M8 4v16m-4-4 4 4 4-4M16 4v16m-4-12 4-4 4 4\"/>","box":"<path d=\"m12 3 9 5v9l-9 5-9-5V8zM3 8l9 5 9-5M12 13v9M7 5.8l9 5\"/>","leaf":"<path d=\"M20 4C10 2 3 7 4 14c1 7 13 8 16-10ZM4 21l11-11M9 16v-5M9 16h5\"/>","egg":"<path d=\"M19 15c0 4-3 7-7 7s-7-3-7-7S9 2 12 2s7 9 7 13Z\"/>","milk":"<path d=\"M8 2h8v4l3 4v12H5V10l3-4ZM8 6h8M5 10h14M9 14h6\"/>","tomato":"<path d=\"M12 6c-5-4-10 1-10 6 0 6 5 9 10 9s10-3 10-9c0-5-5-10-10-6ZM12 6l-1-4M8 5l4 2 4-2\"/>","lock":"<rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3M12 14v3\"/>"};
+function icon(name){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+(iconPaths[name]||iconPaths.box)+'</svg>'}
+const today=new Date();today.setHours(0,0,0,0);
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function date(s){return new Date(s+'T00:00:00')}
+function offset(n){let d=new Date(today);d.setDate(d.getDate()+n);return iso(d)}
+function plus(s,n){let d=date(s);d.setDate(d.getDate()+Number(n));return iso(d)}
+function diff(a,b){return Math.round((date(a)-date(b))/86400000)}
+function left(s){return diff(s,iso(today))}
+function fmt(s){let d=date(s);return (d.getMonth()+1)+'/'+d.getDate()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const base={'キャベツ':{days:7,icon:'leaf'},'卵':{days:10,icon:'egg'},'トマト':{days:5,icon:'tomato'},'豆腐':{days:3,icon:'box'},'牛乳':{days:5,icon:'milk'},'ロースハム':{days:4,icon:'box'}};
+const key='fridge-ui-v1';let standards={},items=[],filter='all',editing=null,lastRemoved=null,usingId=null,storageFailed=false;
+function seed(){items=[{id:'1',name:'豆腐',state:'未開封・そのまま',purchase:offset(-4),due:offset(-1)},{id:'2',name:'キャベツ',state:'カット済み',purchase:offset(-3),changed:offset(-2),due:offset(0)},{id:'3',name:'ロースハム',state:'開封済み',purchase:offset(-3),changed:offset(-2),due:offset(2)},{id:'4',name:'トマト',state:'未開封・そのまま',purchase:offset(-1),due:offset(4)},{id:'5',name:'卵',state:'未開封・そのまま',purchase:offset(-2),due:offset(8)}]}
+try{let s=JSON.parse(localStorage.getItem(key));if(s&&Array.isArray(s.items)&&s.items.every(x=>x.id&&typeof x.name==='string'&&x.purchase&&x.due)){items=s.items;standards=s.standards||{}}else seed()}catch{seed()}
+function persist(){storageFailed=false;try{localStorage.setItem(key,JSON.stringify({items,standards}))}catch{storageFailed=true}return !storageFailed}
+function toast(message,undo=false){$('toast-text').textContent=message;$('undo').hidden=!undo;$('toast').hidden=false}
+function savedToast(message,undo=false){toast(storageFailed?message+'。端末に保存できないため、再読み込みすると失われます。':message,undo)}
+
+const foodDrawings={
+'キャベツ':`<path fill="#a5b49a" d="M15 60c-5-23 9-43 34-43 27-2 44 21 37 47-5 21-25 26-45 20C26 85 16 75 15 60Z"/><path fill="#bdc8ac" d="M25 61c-4-15 3-31 18-33 20-5 35 10 31 29-1 13-12 22-25 20-14 1-23-5-24-16Z"/><g stroke="#7b9277" stroke-width="2" fill="none"><path d="M50 80V38m0 26L34 46m16 12 15-18M50 74 30 62m20 6 19-12"/><path d="M22 45c-1 22 7 34 22 37M71 26c9 10 10 29 2 42"/></g>`,
+'トマト':`<path fill="#bd7b69" d="M48 31c-22-12-40 8-35 30 3 18 17 26 37 26 23 0 37-14 37-33-1-21-21-33-39-23Z"/><path fill="#cc9380" d="M25 43c-6 8-6 20-1 25 5 2 2-10 7-18 5-7 0-11-6-7Z"/><path fill="#7f9476" d="m49 36-17-9 14 1 2-16 5 15 16-4-13 11 4 9Z"/>`,
+'卵':`<path fill="#d5bba0" d="M37 22c-9 0-22 23-22 39 0 14 9 23 22 23 14 0 23-9 23-23 0-16-14-39-23-39Z"/><path fill="#e8dbca" d="M65 19c-9 0-22 23-22 40 0 13 9 23 22 23 14 0 23-10 23-23 0-17-14-40-23-40Z"/><path d="M58 37c-4 6-6 12-7 18" stroke="#f7efe4" stroke-width="4" stroke-linecap="round"/>`,
+'牛乳':`<path fill="#e4e0d4" d="m31 16 36 0 12 18v52H24V34Z"/><path fill="#b0bdc0" d="m31 16 0-6h36v6l-8 18H24Z"/><path fill="#d0d5cf" d="m59 34 8-18 12 18v52H59Z"/><path fill="#a0b2b8" d="M24 49h35v23H24Z"/><path stroke="#f1f1e8" stroke-width="3" d="M32 58h19m-19 6h12"/>`,
+'豆腐':`<rect x="12" y="32" width="77" height="50" rx="9" fill="#aebcb6"/><path fill="#d7dfd2" d="m17 27 57-5 15 13-15 14-61-5Z"/><path fill="#eee9dc" d="m27 30 43-3 8 7-11 9-41-4Z"/><path fill="#e2dfd2" d="M26 39v25l41 5V43Z"/><path fill="#d1cdbf" d="m67 43 11-9v26l-11 9Z"/><rect x="37" y="66" width="29" height="13" rx="2" fill="#e5e9df"/><path stroke="#91a59a" stroke-width="2" d="M43 72h17"/>`,
+'ロースハム':`<ellipse cx="49" cy="66" rx="35" ry="22" fill="#b77f7b"/><ellipse cx="49" cy="61" rx="35" ry="22" fill="#dbb4aa"/><ellipse cx="51" cy="52" rx="35" ry="23" fill="#b77f7b"/><ellipse cx="51" cy="49" rx="33" ry="21" fill="#cca19b"/><path d="M27 44c4-6 12-9 20-9" stroke="#e7c3b9" stroke-width="3" stroke-linecap="round"/><path d="m40 57 3 1m20-14 3 1m-7 16 3-1" stroke="#ddb5ad" stroke-width="3" stroke-linecap="round"/>`
+};
+
+Object.assign(foodDrawings,{'にんじん':`<path fill="#b99270" d="M33 27c11-9 35-6 38 6 3 13-33 52-42 54-5-7-4-47 4-60Z"/><path fill="#91a084" d="m48 27-6-19 9 7 8-11 1 19 15-7-9 17Z"/><path d="m34 43 10 4m-13 8 8 4m-10 9 5 3" stroke="#a78061" stroke-width="2"/>`,'玉ねぎ':`<path fill="#bca383" d="M45 22c-5 9-24 18-25 36-2 23 14 30 31 30 22 0 34-12 30-33-4-16-24-24-26-33Z"/><path fill="#d6c6a4" d="M48 26c-13 20-22 50-3 60-2-22-2-42 3-60Zm7 0c16 20 22 47 3 59 5-24 4-42-3-59Z"/><path fill="#93806a" d="m44 25 3-13 6 7 7-9-4 17Z"/>`,'じゃがいも':`<path fill="#bfae92" d="M14 57c1-23 20-24 31-33 15-12 43 4 43 24 0 17-10 36-31 37-23 2-44-9-43-28Z"/><g fill="#9c8b72"><ellipse cx="32" cy="49" rx="3" ry="2"/><ellipse cx="62" cy="37" rx="2" ry="3"/><ellipse cx="70" cy="64" rx="3" ry="2"/><ellipse cx="43" cy="73" rx="2" ry="2"/></g>`,'きゅうり':`<path d="M27 79C25 52 48 27 74 19" stroke="#7c9475" stroke-width="22" stroke-linecap="round"/><path d="M26 75c4-23 22-44 45-52" stroke="#a4b498" stroke-width="5" stroke-linecap="round"/><g fill="#647f61"><circle cx="40" cy="62" r="1.5"/><circle cx="51" cy="44" r="1.5"/><circle cx="66" cy="33" r="1.5"/></g>`,'なす':`<path fill="#817d95" d="M60 27c28 6 23 31 6 47-17 17-43 15-48 1-7-21 29-16 32-37Z"/><path fill="#9b97ad" d="M54 42c-5 18-26 21-28 28 13-1 34-14 38-28Z"/><path fill="#85947a" d="m48 29 11-4 2-14 7-3-1 18 12 9-13 1-7 11-1-11-12 3Z"/>`,'ピーマン':`<path fill="#88a080" d="M25 34c10-15 19-7 25-7 9 0 21-9 29 5 9 16-1 43-11 49-8 5-13-1-18 2-12 7-18-6-22-17-4-9-7-24-3-32Z"/><path d="M48 32c-7 13-5 34 0 45m16-42c7 11 3 26-1 34" stroke="#a6b79a" stroke-width="4" fill="none"/><path d="m50 28 6-17" stroke="#718766" stroke-width="7"/>`,'ブロッコリー':`<path fill="#a4b399" d="m42 48-2 37h21l-5-37Z"/><path d="m49 63-17-18m19 16 18-17" stroke="#a4b399" stroke-width="10"/><g fill="#7c957c"><circle cx="28" cy="40" r="17"/><circle cx="48" cy="27" r="19"/><circle cx="70" cy="37" r="19"/><circle cx="48" cy="45" r="18"/></g><path d="M27 30c3-4 7-6 12-5m7-10c4-2 9 0 12 3" stroke="#9eaf94" stroke-width="3" fill="none"/>`,'しめじ':`<path d="m31 41 4 40m19-45-4 48m23-38-8 35" stroke="#dcd3bf" stroke-width="10"/><path fill="#a29480" d="M15 43c0-24 32-24 32 0Zm21-11c0-26 34-26 34 0Zm23 16c0-25 30-25 30 0Z"/>`,'長ねぎ':`<path d="m28 85 22-44" stroke="#e1e0cd" stroke-width="17"/><path d="m50 42 9-26m-9 26 21-21m-21 21 1-29" stroke="#8ea588" stroke-width="9"/><path d="m23 82 14-29" stroke="#f0ebd9" stroke-width="3"/>`,'レタス':`<path fill="#acbda1" d="M22 75c-15-10-14-33 1-39-2-17 16-24 30-17 18-8 34 6 30 20 15 13 6 34-8 35-14 18-42 18-53 1Z"/><path fill="#c4cfb4" d="M28 48c9-12 29-22 45-10-14 3-19 17-22 42-12-17-20-22-23-32Z"/><path d="M51 80 46 47m5 22 16-17m-16 9-15-8" stroke="#91a587" stroke-width="2" fill="none"/>`,'鶏肉':`<path fill="#d6b8a7" d="M19 68c-4-20 14-41 31-43 18-4 40 14 35 32-6 21-29 25-47 27-10 1-17-6-19-16Z"/><path fill="#e4cbbb" d="M27 62c-2-13 10-28 22-30 14-4 28 6 27 18-10-7-23-5-30 2-8 8-11 16-19 10Z"/><path d="m40 69 16-7m-24 5 9-6" stroke="#bd9e90" stroke-width="2"/>`,'豚肉':`<path fill="#b88b86" d="m15 37 62-13 11 44-64 16Z"/><path fill="#d3aaa0" d="m16 33 62-13 9 42-64 16Z"/><path d="m18 41 61-14m-57 30 61-14m-58 28 61-15" stroke="#e8d2c2" stroke-width="7"/>`,'鮭':`<path fill="#a48f82" d="M14 67c18-21 40-40 63-42l11 40c-27 1-49 11-68 16Z"/><path fill="#cc9c83" d="M14 62c18-21 40-40 63-42l9 39c-27 1-47 10-66 16Z"/><path d="m29 49 10 19m6-32 11 26m6-35 9 31" stroke="#e9cbb2" stroke-width="3"/>`,'えび':`<path d="M66 24c-29-12-51 12-43 37 6 21 33 24 48 7" stroke="#bc8d7b" stroke-width="18" fill="none"/><path d="M60 24C35 18 22 36 27 56" stroke="#dbb5a1" stroke-width="8" fill="none"/><path d="m39 24 3 12m-18 1 13 3m-12 14 13-3m-3 22 6-12m9 16 1-12" stroke="#a77868" stroke-width="2"/><path fill="#bf927e" d="m65 69 19-9-6 15 6 9-21-7Z"/>`,'あさり':`<path fill="#aaa08e" d="M12 57c0-24 35-33 43-6 4 15-22 31-34 21Z"/><path fill="#c8b9a0" d="M44 58c0-28 39-35 45-6 4 17-24 34-39 23Z"/><path d="m25 36 6 30m10-25-9 25m28-30 4 34m13-31L65 70m-16-14 15 14" stroke="#918571" stroke-width="2" fill="none"/>`,'枝豆':`<path fill="#8fa37c" d="M15 72c6-19 43-51 63-47 23 8-22 58-52 59-10 0-15-4-11-12Z"/><g fill="#b2bf96"><ellipse cx="31" cy="67" rx="10" ry="9" transform="rotate(-30 31 67)"/><ellipse cx="49" cy="51" rx="10" ry="9"/><ellipse cx="67" cy="37" rx="10" ry="8"/></g><path d="m76 26 9-8" stroke="#7a8d69" stroke-width="4"/>`,'チーズ':`<path fill="#c7b17f" d="m15 68 61-43 12 51-73 11Z"/><path fill="#e0cc97" d="m15 52 61-43 12 51-73 11Z"/><path fill="#d2bd8a" d="M15 52v19l73-11v16L15 87Z"/><g fill="#baa06e"><ellipse cx="51" cy="39" rx="6" ry="4"/><ellipse cx="70" cy="49" rx="5" ry="3"/><circle cx="32" cy="58" r="3"/></g>`,'食パン':`<path fill="#b89a7a" d="M23 40c-21-29 71-40 59-3l-4 48H24Z"/><path fill="#dfcfb2" d="M29 42c-17-23 56-30 46-5l-4 42H30Z"/><path d="m39 41 23-3" stroke="#eaddc4" stroke-width="4" stroke-linecap="round"/>`});
+
+Object.assign(foodDrawings,{"白菜": "<path fill=\"#a6b69b\" d=\"M25 28c1-19 48-22 53 0l-4 57H30Z\"/><path fill=\"#d6dbc2\" d=\"m30 30 15 8 8-15 10 18 13-12-9 56H37Z\"/><path d=\"m49 79-9-38m17 38 6-34\" stroke=\"#edefdc\" stroke-width=\"4\"/>", "ほうれん草": "<path fill=\"#829d7e\" d=\"M32 66C8 44 24 14 43 20c8-15 30-8 32 10 23 5 17 35-7 41L52 87Z\"/><path d=\"M51 82 49 29m1 35-18-19m19 10 15-18\" fill=\"none\" stroke=\"#bdc8a1\" stroke-width=\"4\"/>", "小松菜": "<path fill=\"#92aa89\" d=\"M24 67C9 51 17 26 34 27c7-17 29-14 34 1 22-4 28 25 10 40L51 88Z\"/><path d=\"m51 84-2-48m0 28L32 48m18 8 17-17\" fill=\"none\" stroke=\"#c6cfb1\" stroke-width=\"4\"/>", "チンゲン菜": "<path fill=\"#96ad8b\" d=\"M24 67C9 51 17 26 34 27c7-17 29-14 34 1 22-4 28 25 10 40L51 88Z\"/><path d=\"m51 84-2-48m0 28L32 48m18 8 17-17\" fill=\"none\" stroke=\"#d8ddc2\" stroke-width=\"4\"/><path fill=\"#e0e2ce\" d=\"m42 52-5 29c5 10 21 10 26 0l-7-29-3 27-4-27Z\"/>", "水菜": "<path fill=\"#9eb18a\" d=\"M32 66C8 44 24 14 43 20c8-15 30-8 32 10 23 5 17 35-7 41L52 87Z\"/><path d=\"M51 82 49 29m1 35-18-19m19 10 15-18\" fill=\"none\" stroke=\"#d8dec2\" stroke-width=\"4\"/><path d=\"m24 30 9 9m-14 7 13 3m42-18-10 10m17 7-13 7\" stroke=\"#718e6b\" stroke-width=\"3\"/>", "春菊": "<path fill=\"#8ba282\" d=\"M32 66C8 44 24 14 43 20c8-15 30-8 32 10 23 5 17 35-7 41L52 87Z\"/><path d=\"M51 82 49 29m1 35-18-19m19 10 15-18\" fill=\"none\" stroke=\"#c0cc9e\" stroke-width=\"4\"/>", "大根": "<path fill=\"#e1e1d1\" d=\"M31 29c-12 24 4 49 31 58 12-19 16-38 2-55Z\"/><path fill=\"#9daf90\" d=\"m39 33-16-18 17 7 4-18 9 19 18-14-6 27Z\"/><path d=\"m36 50 12 3m-5 13 10 2\" stroke=\"#c6cdb8\" stroke-width=\"2\"/>", "かぶ": "<path fill=\"#dfdfcf\" d=\"M20 53c-1-27 60-26 61 0 1 18-15 29-30 27l2 12-8-12C31 79 21 68 20 53Z\"/><path d=\"m47 36-13-20m16 18 4-24m0 25 18-17\" stroke=\"#96a98a\" stroke-width=\"8\"/>", "ごぼう": "<path d=\"m27 82 39-62m-22 64 34-58\" stroke=\"#aa967a\" stroke-width=\"10\"/><path d=\"m30 69 5 2m7-21 5 2m7-20 4 2m4 21 5 2m-18 20 4 2\" stroke=\"#86765f\" stroke-width=\"2\"/>", "れんこん": "<ellipse cx=\"43\" cy=\"56\" rx=\"32\" ry=\"27\" fill=\"#b9a98c\"/><ellipse cx=\"49\" cy=\"47\" rx=\"32\" ry=\"27\" fill=\"#ded2b5\"/><g fill=\"#ac9a7c\"><ellipse cx=\"49\" cy=\"47\" rx=\"5\" ry=\"6\"/><ellipse cx=\"32\" cy=\"40\" rx=\"5\" ry=\"8\" transform=\"rotate(30 32 40)\"/><ellipse cx=\"45\" cy=\"29\" rx=\"7\" ry=\"4\"/><ellipse cx=\"64\" cy=\"37\" rx=\"5\" ry=\"7\"/><ellipse cx=\"65\" cy=\"55\" rx=\"6\" ry=\"5\"/><ellipse cx=\"47\" cy=\"64\" rx=\"7\" ry=\"4\"/><ellipse cx=\"31\" cy=\"57\" rx=\"5\" ry=\"6\"/></g>", "里芋": "<path fill=\"#a5947f\" d=\"M19 66c-4-17 8-35 22-32 17 4 18 43 0 47-11 3-20-4-22-15Zm36-21c-2-13 9-25 20-21 19 7 13 40 0 43-13 3-19-11-20-22Z\"/><path d=\"m22 54 24 5m-22 7 21 4m14-31 22 6m-21 6 20 5\" stroke=\"#897b68\" stroke-width=\"2\"/>", "さつまいも": "<path fill=\"#a08a91\" d=\"M15 74c0-21 24-27 36-44 14-18 39-12 34 5-9 27-39 51-55 51-9 0-15-5-15-12Z\"/><path d=\"m30 68 6-5m23-20 5-5m-9 26 5-4\" stroke=\"#b8a0a2\" stroke-width=\"3\"/>", "かぼちゃ": "<path fill=\"#879780\" d=\"M15 70 67 18c15 9 23 31 20 51Z\"/><path fill=\"#c4a57c\" d=\"M20 65 67 24c10 7 17 22 17 38Z\"/><path fill=\"#deca9c\" d=\"M42 53 66 32c7 6 10 13 11 21Z\"/><g fill=\"#bda57c\"><ellipse cx=\"62\" cy=\"43\" rx=\"3\" ry=\"5\"/><ellipse cx=\"68\" cy=\"49\" rx=\"4\" ry=\"2\"/></g>", "ズッキーニ": "<path d=\"M26 78 70 28\" stroke=\"#879b7d\" stroke-width=\"26\" stroke-linecap=\"round\"/><path d=\"M25 73 65 28\" stroke=\"#a8b49a\" stroke-width=\"4\"/><path d=\"m72 25 8-10\" stroke=\"#8c9675\" stroke-width=\"10\"/>", "パプリカ": "<path fill=\"#c3937d\" d=\"M23 36c5-15 21-12 27-8 8-6 26-8 29 8 6 24-4 48-18 47l-11-4-13 4c-13-2-18-29-14-47Z\"/><path d=\"M49 34c-6 15-4 32 1 44m15-40c6 8 3 23 0 29\" fill=\"none\" stroke=\"#dcb297\" stroke-width=\"4\"/><path d=\"m51 29 4-16\" stroke=\"#849779\" stroke-width=\"7\"/>", "オクラ": "<path fill=\"#94a780\" d=\"M18 83 48 25l21 12-45 50Z\"/><path fill=\"#b3bf97\" d=\"m23 82 34-51 5 3Z\"/><path fill=\"#7f936e\" d=\"m45 25 7-13 20 11-5 14Z\"/><path stroke=\"#aebc96\" stroke-width=\"3\" d=\"m67 70 12-13\"/>", "いんげん": "<path d=\"M24 80C25 55 38 33 48 19m-9 65C43 57 53 41 66 26m-10 56c10-16 19-27 26-47\" fill=\"none\" stroke=\"#94a784\" stroke-width=\"8\" stroke-linecap=\"round\"/>", "アスパラガス": "<path d=\"m25 83 24-54m-8 57 27-55m-11 55 24-49\" stroke=\"#9ead85\" stroke-width=\"9\"/><path fill=\"#7d946f\" d=\"m42 35 13 4 2-28Zm20 1 13 4 3-27Zm12 9 12 4 3-26Z\"/><path d=\"m29 70 6 3m4-21 6 3m2 16 6 3m10-10 6 3\" stroke=\"#c4ccaa\" stroke-width=\"2\"/>", "もやし": "<g stroke=\"#e1deca\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\"><path d=\"M20 71q-10-27 20-38M34 79q-1-34 20-34M48 78q20-20 17-43M64 81q20-20 16-30M26 59q22-12 10-34\"/></g><g fill=\"#c2b892\"><ellipse cx=\"41\" cy=\"32\" rx=\"6\" ry=\"4\"/><ellipse cx=\"55\" cy=\"44\" rx=\"5\" ry=\"3\"/><ellipse cx=\"65\" cy=\"34\" rx=\"4\" ry=\"6\"/><ellipse cx=\"79\" cy=\"49\" rx=\"4\" ry=\"6\"/><ellipse cx=\"35\" cy=\"25\" rx=\"5\" ry=\"3\"/></g>", "にら": "<path fill=\"#91a181\" d=\"m23 85 7-67 8-6-5 73Zm14 0 14-72 6-3-9 75Zm14 0 17-65 9-5-16 70Zm16 0 13-53 8-9-13 62Z\"/><path stroke=\"#c0c6a3\" stroke-width=\"7\" d=\"m25 82 49 1\"/>", "しいたけ": "<path d=\"m36 45 2 33m27-34-4 34\" stroke=\"#d5c9b1\" stroke-width=\"12\"/><path fill=\"#9c8a75\" d=\"M12 49c0-38 51-38 51 0Zm29 1c0-36 48-36 48 0Z\"/><path d=\"m30 26 13 13m0-13L30 39m29-9 12 11m0-11L59 41\" stroke=\"#c9bda5\" stroke-width=\"2\"/>", "えのき": "<g stroke=\"#ded8c3\" stroke-width=\"4\"><path d=\"M42 85 21 34m23 51L34 26m13 59V25m5 60 9-59m-5 59 20-50\"/></g><g fill=\"#d0c5aa\"><circle cx=\"21\" cy=\"33\" r=\"7\"/><circle cx=\"34\" cy=\"25\" r=\"7\"/><circle cx=\"47\" cy=\"24\" r=\"7\"/><circle cx=\"61\" cy=\"25\" r=\"7\"/><circle cx=\"76\" cy=\"34\" r=\"7\"/></g>", "なめこ": "<g stroke=\"#d4c0a0\" stroke-width=\"8\"><path d=\"M29 49v28m22-39-1 41m24-25-6 24\"/></g><path fill=\"#b18d64\" d=\"M13 51c0-29 33-29 33 0Zm21-11c0-27 33-27 33 0Zm25 16c0-26 30-26 30 0Z\"/>", "まいたけ": "<path fill=\"#c9bfa8\" d=\"m31 75 20-35 20 35-14 12Z\"/><g fill=\"#a29681\"><path d=\"M16 45c-10-17 13-27 29-8l6 11Zm23-13c-4-22 26-22 27-1l-8 16Zm18 15c9-23 36-15 29 1L69 60ZM20 64c-11-21 14-23 29-6l-5 15Zm29 4c7-23 39-18 32 1L62 82Z\"/></g>", "さば": "<path fill=\"#c6ccc4\" d=\"M10 52Q42 29 76 47L91 36 86 53 92 69 75 58Q40 78 10 52Z\"/><path fill=\"#83989c\" d=\"M11 52Q43 29 76 47L73 51Q39 45 11 52Z\"/><path d=\"m32 40 8-10 13 6m-13 31 8 8 10-12\" fill=\"#83989c\"/><circle cx=\"22\" cy=\"51\" r=\"2.5\" fill=\"#5f6563\"/><path d=\"M30 45q7 8 0 15\" stroke=\"#8e9991\" stroke-width=\"1.7\" fill=\"none\"/><path d=\"m42 40 3 7m6-9 4 8m6-8 3 8m5-6 3 7\" stroke=\"#647f89\" stroke-width=\"2\"/>", "あじ": "<path fill=\"#c4c6b6\" d=\"M10 52Q42 29 76 47L91 36 86 53 92 69 75 58Q40 78 10 52Z\"/><path fill=\"#93a08c\" d=\"M11 52Q43 29 76 47L73 51Q39 45 11 52Z\"/><path d=\"m32 40 8-10 13 6m-13 31 8 8 10-12\" fill=\"#93a08c\"/><circle cx=\"22\" cy=\"51\" r=\"2.5\" fill=\"#5f6563\"/><path d=\"M30 45q7 8 0 15\" stroke=\"#8e9991\" stroke-width=\"1.7\" fill=\"none\"/><path d=\"m42 57 27-3\" stroke=\"#9a9c83\" stroke-width=\"2\"/>", "いわし": "<path fill=\"#c5ceca\" d=\"M8 53Q42 39 79 49L93 42 88 54 94 63 79 59Q42 68 8 53Z\"/><path fill=\"#83999c\" d=\"M11 52Q43 29 76 47L73 51Q39 45 11 52Z\"/><path d=\"m32 40 8-10 13 6m-13 31 8 8 10-12\" fill=\"#83999c\"/><circle cx=\"22\" cy=\"51\" r=\"2.5\" fill=\"#5f6563\"/><path d=\"M30 45q7 8 0 15\" stroke=\"#8e9991\" stroke-width=\"1.7\" fill=\"none\"/><g fill=\"#788b8b\"><circle cx=\"40\" cy=\"51\" r=\"2\"/><circle cx=\"50\" cy=\"50\" r=\"2\"/><circle cx=\"60\" cy=\"51\" r=\"2\"/><circle cx=\"69\" cy=\"52\" r=\"2\"/></g>", "さんま": "<path fill=\"#bfc9c5\" d=\"M8 57 24 49 79 47 91 38 87 52 94 62 79 57 25 62Z\"/><path fill=\"#82969a\" d=\"m8 57 16-8 55-2-3 5-53 4Z\"/><circle cx=\"22\" cy=\"55\" r=\"2\" fill=\"#5d6664\"/>", "ぶり": "<path fill=\"#84978d\" d=\"m15 65 60-40 11 45-64 14Z\"/><path fill=\"#cfb3a5\" d=\"m15 58 60-40 9 44-62 14Z\"/><path fill=\"#ab8480\" d=\"m22 64 48-33 3 11-47 30Z\"/><path stroke=\"#e4cbbc\" stroke-width=\"2\" d=\"m34 49 8 13m9-24 7 13\"/>", "たら": "<path fill=\"#b8b9ac\" d=\"M13 61c20-10 38-39 64-35l10 38-65 17Z\"/><path fill=\"#e1dccc\" d=\"M13 56c20-10 38-39 64-35l8 37-63 17Z\"/><path d=\"m31 49 10 18m4-29 12 23m3-32 11 27\" stroke=\"#c8c3b1\" stroke-width=\"2\"/>", "たい": "<path fill=\"#caa69d\" d=\"M10 54c12-34 51-32 66-7l15-10-4 18 5 18-17-12C54 83 22 79 10 54Z\"/><path fill=\"#b58f88\" d=\"m28 33 6-12 8 9 10-11 7 14m-23 39 10 13 11-13Z\"/><circle cx=\"22\" cy=\"51\" r=\"2.5\" fill=\"#716563\"/><path d=\"M30 42q9 10 0 22m11-23 4 4m9-4 4 4m-17 9 4 4m10-4 4 4\" stroke=\"#e0bfb1\" stroke-width=\"2\" fill=\"none\"/>", "まぐろ": "<path fill=\"#a57877\" d=\"m15 66 20-38 53 8-9 44Z\"/><path fill=\"#c59891\" d=\"m15 57 20-38 53 8-9 44Z\"/><path d=\"m34 24-12 33m24-32L34 60m24-33L46 62m24-33L58 65m24-34L70 67\" stroke=\"#dcb5a9\" stroke-width=\"2\"/>", "かつお": "<path fill=\"#7f8e8b\" d=\"m15 68 48-48 25 51-66 12Z\"/><path fill=\"#ae8883\" d=\"m15 61 48-48 25 51-66 12Z\"/><path fill=\"#c59d90\" d=\"m25 61 36-36 16 34Z\"/><path d=\"m46 41 8 18m5-31 10 29\" stroke=\"#dec0ac\" stroke-width=\"2\"/>", "しらす": "<g stroke=\"#cdd1c7\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"><path d=\"M17 35q8 13 24 7m-3-15q8 13 24 7m-44 23q9 15 26 10m3-18q8 13 24 7m-17 16q12 12 29 4\"/></g><g fill=\"#8e9b94\"><circle cx=\"17\" cy=\"35\" r=\"2\"/><circle cx=\"38\" cy=\"27\" r=\"2\"/><circle cx=\"18\" cy=\"57\" r=\"2\"/><circle cx=\"47\" cy=\"49\" r=\"2\"/><circle cx=\"54\" cy=\"72\" r=\"2\"/></g>", "ほっけ": "<path fill=\"#9b9883\" d=\"M49 17C5 33 16 72 45 82l6 10 6-10c28-11 39-50-8-65Z\"/><path fill=\"#d2bea1\" d=\"M47 26c-30 13-28 37-5 48l7-5 9 5c23-11 23-35-6-48Z\"/><path d=\"M50 25v48m-5-36-14 8m14 3-17 8m17 2-12 7m23-28 14 8m-14 3 17 8m-17 2 12 7\" stroke=\"#b49c80\" stroke-width=\"2\"/>", "かれい": "<path fill=\"#a0a08b\" d=\"M14 49c4-23 42-36 64-7l13-6-4 16 4 16-14-8C58 85 22 80 14 49Z\"/><path fill=\"#b9b6a0\" d=\"M25 49c4-17 29-23 44-6 9 14-12 32-30 20Z\"/><circle cx=\"26\" cy=\"41\" r=\"2.5\" fill=\"#686f63\"/><circle cx=\"29\" cy=\"49\" r=\"2.5\" fill=\"#686f63\"/><path d=\"m39 24 13-9 16 15M38 73l16 9 13-13\" fill=\"#90937d\"/>", "いか": "<path fill=\"#c5c6ba\" d=\"M50 13 17 44l18 4 4 23h23l4-23 18-4Z\"/><path fill=\"#e1ded0\" d=\"M50 14c-11 17-16 39-11 57h23c4-18-1-41-12-57Z\"/><path d=\"m39 68-9 17m17-15-3 19m11-19 4 19m4-21 11 16\" stroke=\"#d4d2c3\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"42\" cy=\"63\" r=\"2\" fill=\"#777d75\"/><circle cx=\"59\" cy=\"63\" r=\"2\" fill=\"#777d75\"/>", "たこ": "<path fill=\"#ae8f8d\" d=\"M30 43c-6-33 44-34 42-2l-9 27H38Z\"/><path d=\"M40 60q-22 36-24 13m30-10q-13 39-18 20m27-20q0 35-6 25m12-26q23 35 25 12m-26-6q13 30 17 15\" fill=\"none\" stroke=\"#ae8f8d\" stroke-width=\"9\" stroke-linecap=\"round\"/><circle cx=\"40\" cy=\"52\" r=\"2\" fill=\"#736463\"/><circle cx=\"60\" cy=\"52\" r=\"2\" fill=\"#736463\"/>", "ほたて": "<path fill=\"#c7b9a0\" d=\"M50 80C5 59 12 30 29 29c4-15 17-11 22-7 17-14 32-1 28 7 22 8 11 36-29 51Z\"/><path d=\"M50 77 29 32m21 45L43 28m7 49 13-48m-13 48 25-42\" stroke=\"#a99a82\" stroke-width=\"2\"/><ellipse cx=\"50\" cy=\"57\" rx=\"19\" ry=\"16\" fill=\"#e4d9bf\"/>", "牡蠣": "<path fill=\"#a1a493\" d=\"M22 59c-15-16-1-28 12-27 3-16 34-22 38-8 20 1 20 25 11 34-1 22-31 32-41 23-16 11-31-10-20-22Z\"/><path fill=\"#d6d6c3\" d=\"M30 59c-8-20 23-40 38-27 23 8 6 43-19 42-17 5-26-3-19-15Z\"/><path fill=\"#b8b89f\" d=\"M42 47c-15 10-3 25 14 17 17-12 1-22-14-17Z\"/>"});
+const foodAliases={"キャベツ": ["きゃべつ"], "卵": ["玉子", "たまご", "タマゴ"], "トマト": ["とまと", "ミニトマト", "プチトマト"], "牛乳": ["ミルク"], "豆腐": ["とうふ", "木綿豆腐", "絹豆腐", "絹ごし豆腐"], "ロースハム": ["ハム", "はむ"], "にんじん": ["人参", "ニンジン"], "玉ねぎ": ["玉葱", "たまねぎ", "タマネギ", "新玉ねぎ"], "じゃがいも": ["ジャガイモ", "馬鈴薯"], "きゅうり": ["胡瓜", "キュウリ"], "なす": ["茄子", "ナス"], "ピーマン": ["ぴーまん"], "ブロッコリー": ["ぶろっこりー"], "しめじ": ["ぶなしめじ", "ブナシメジ"], "長ねぎ": ["ねぎ", "ネギ", "白ねぎ", "長ネギ", "長葱"], "レタス": ["れたす", "サニーレタス"], "鶏肉": ["とり肉", "鳥肉", "鶏むね肉", "鶏胸肉", "鶏もも肉", "ささみ"], "豚肉": ["豚バラ", "豚こま", "豚ロース"], "鮭": ["さけ", "サケ", "サーモン", "しゃけ", "シャケ", "銀鮭", "紅鮭"], "えび": ["海老", "エビ"], "あさり": ["浅蜊", "アサリ"], "枝豆": ["えだまめ", "エダマメ"], "白菜": ["はくさい", "ハクサイ"], "ほうれん草": ["ほうれんそう", "ホウレンソウ", "法蓮草"], "小松菜": ["こまつな", "コマツナ"], "チンゲン菜": ["青梗菜", "チンゲンサイ", "ちんげんさい"], "水菜": ["みずな", "ミズナ"], "春菊": ["しゅんぎく", "シュンギク"], "大根": ["だいこん", "ダイコン"], "かぶ": ["蕪", "カブ"], "ごぼう": ["牛蒡", "ゴボウ"], "れんこん": ["蓮根", "レンコン"], "里芋": ["さといも", "サトイモ"], "さつまいも": ["サツマイモ", "さつま芋", "薩摩芋"], "かぼちゃ": ["南瓜", "カボチャ"], "ズッキーニ": ["ずっきーに"], "パプリカ": ["ぱぷりか"], "オクラ": ["おくら"], "いんげん": ["インゲン", "さやいんげん"], "アスパラガス": ["アスパラ", "あすぱら"], "もやし": ["モヤシ"], "にら": ["韮", "ニラ"], "しいたけ": ["椎茸", "シイタケ"], "えのき": ["エノキ", "えのき茸", "エノキタケ"], "なめこ": ["ナメコ"], "まいたけ": ["舞茸", "マイタケ"], "さば": ["鯖", "サバ", "真さば"], "あじ": ["鯵", "アジ", "真あじ"], "いわし": ["鰯", "イワシ"], "さんま": ["秋刀魚", "サンマ"], "ぶり": ["鰤", "ブリ", "はまち", "ハマチ"], "たら": ["鱈", "タラ", "真鱈", "真だら"], "たい": ["鯛", "タイ", "真鯛", "真たい"], "まぐろ": ["鮪", "マグロ"], "かつお": ["鰹", "カツオ"], "しらす": ["シラス", "釜揚げしらす"], "ほっけ": ["ホッケ"], "かれい": ["鰈", "カレイ"], "いか": ["烏賊", "イカ"], "たこ": ["蛸", "タコ"], "ほたて": ["帆立", "ホタテ", "ほたて貝柱"], "牡蠣": ["かき", "カキ"]};
+const normalizeFoodName=name=>String(name).normalize('NFKC').replace(/[\s・･]/g,'');
+const foodNameLookup=new Map();for(const name of Object.keys(foodDrawings)){for(const spelling of [name,...(foodAliases[name]||[])])foodNameLookup.set(normalizeFoodName(spelling),name)}
+function resolveFoodName(name){let n=normalizeFoodName(name);if(foodNameLookup.has(n))return foodNameLookup.get(n);n=n.replace(/^(?:冷凍|冷蔵|国産|生|塩|骨取り|骨抜き)+/,'').replace(/(?:の)?(?:切り身|切身|フィレ|スライス|カット|刺身用|刺身|むき身|水煮|缶詰|缶)$/,'');return foodNameLookup.get(n)||name}
+let artSerial=0;
+function foodArt(name,gloss=false,condition='normal'){const canonical=resolveFoodName(name);const body=foodDrawings[canonical]||`<path fill="#b4bdae" d="m23 26 48-7 13 13v50H23Z"/><path fill="#d0d5c7" d="m23 26 15 12h46L71 19Z"/><rect x="34" y="49" width="38" height="23" rx="3" fill="#ecebdf"/>`;const id='art-'+(++artSerial);let reflection='<path d="M25 50C21 39 30 26 42 26c-8 6-13 15-13 23-1 4-3 4-4 1Z"/><ellipse cx="25" cy="59" rx="2.5" ry="4" transform="rotate(14 25 59)"/>';
+if(['さば','あじ','いわし','さんま','しらす'].includes(canonical))reflection='<path d="M34 49q17-7 31-3l-3 3-27 3Z"/><ellipse cx="29" cy="52" rx="2" ry="1.5"/>';
+if(['きゅうり','長ねぎ','いんげん','アスパラガス','ごぼう','にら','ズッキーニ'].includes(canonical))reflection='<path d="m39 58 12-23 4 1-12 24Z"/><ellipse cx="37" cy="65" rx="2" ry="3" transform="rotate(30 37 65)"/>';
+const fading=condition!=='normal';const definitions='<defs><mask style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100" id="'+id+'-clip">'+body+'</mask>'+(fading?'<radialGradient id="'+id+'-fade" gradientUnits="userSpaceOnUse" cx="60" cy="47" r="17"><stop offset="0" stop-color="#d5d5d5"/><stop offset=".45" stop-color="#e7e7e7"/><stop offset="1" stop-color="#fff"/></radialGradient><mask style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100" id="'+id+'-underlay"><rect width="100" height="100" fill="url(#'+id+'-fade)"/></mask>':'')+'</defs>';
+const crease=condition==='over'?'<path d="M61 40q-.5 5-1 10M59.7 54h.2"/>':'<path d="M56 40q-1 6-2 13M64 41q-1 6-2 13M52 46q7-1 15-2M51 51q7-1 15-2"/>';
+const shine=gloss?'<g class="comic-gloss" fill="#fffdf5" stroke="none" mask="url(#'+id+'-clip)">'+reflection+'</g>':'';
+return '<svg class="food-art" viewBox="0 0 100 100" aria-hidden="true">'+definitions+'<g'+(fading?' mask="url(#'+id+'-underlay)"':'')+'>'+body+shine+'</g>'+(fading?'<g class="condition-crease '+condition+'" mask="url(#'+id+'-clip)" fill="none" stroke-linecap="round" stroke-linejoin="round">'+crease+'</g>':'')+'</svg>'}
+
+
+function remainingLabel(x){const r=x.remaining??1;if(r>=1)return '全量';if(r===.5)return '半分';const d=1/r;return Number.isInteger(d)&&d<=1024?'1/'+d:Math.round(r*1000)/10+'%'}
+function render(){
+ let soon=items.filter(x=>left(x.due)>=0&&left(x.due)<=2).length,over=items.filter(x=>left(x.due)<0).length;
+ $('total').innerHTML=items.length+'<span>品</span>';$('soon').innerHTML=soon+'<span>品</span>';$('over').innerHTML=over+'<span>品</span>';
+ let visible=items.filter(x=>(filter==='all'||filter==='soon'&&left(x.due)>=0&&left(x.due)<=2||filter==='over'&&left(x.due)<0)&&x.name.includes($('search').value.trim())).sort((a,b)=>a.due.localeCompare(b.due));
+ const columns=matchMedia('(max-width:480px)').matches?2:3;let html='';
+ visible.forEach((x,i)=>{if(i%columns===0)html+='<div class="shelf" role="presentation">';let n=left(x.due),label=n<0?Math.abs(n)+'日経過':n===0?'今日が目安':'あと'+n+'日';let condition=n<0?'over':n<=2?'soon':'normal';let glossy=n>=0&&diff(iso(today),x.purchase)>=0&&diff(iso(today),x.purchase)<=1;
+ html+='<article class="food" role="listitem"><button class="food-picture" data-edit="'+esc(x.id)+'" aria-label="'+esc(x.name)+'を編集">'+foodArt(x.name,glossy,condition)+'</button><div class="food-info"><h3>'+esc(x.name)+'</h3><p>'+esc(x.state)+(x.remaining<1?' · 残り'+remainingLabel(x):'')+'</p></div><button class="deadline '+(n<0?'red':n<=2?'amber':'')+'" data-edit="'+esc(x.id)+'" aria-label="'+esc(x.name)+'：'+label+'。使い切り目安を編集"><strong>'+label+'</strong><small>'+fmt(x.due)+'まで · 変更</small></button><button class="complete" data-use="'+esc(x.id)+'" aria-label="'+esc(x.name)+'を使う">'+icon('check')+'<span>使う</span><span aria-hidden="true">⌄</span></button></article>';if(i%columns===columns-1||i===visible.length-1)html+='</div>'});
+ $('list').innerHTML=html||'<div class="empty">'+icon(items.length?'search':'fridge')+'<h3>'+(items.length?'該当する食品はありません':'冷蔵庫は空です')+'</h3><p>'+(items.length?'検索や絞り込みの条件を変えてください。':'最初の食品を登録しましょう。')+'</p><button class="'+(items.length?'secondary':'primary')+'" data-empty="'+(items.length?'clear':'add')+'">'+(items.length?'検索・絞り込みを解除':'食品を追加')+'</button></div>';
+}
+matchMedia('(max-width:480px)').addEventListener('change',render);
+
+function page(name){$('fridge').hidden=name!=='fridge';$('settings').hidden=name!=='settings';document.querySelectorAll('[data-page]').forEach(b=>{b.classList.toggle('active',b.dataset.page===name);if(b.dataset.page===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')})}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));$('sharing-link').onclick=()=>page('settings');$('back-fridge').onclick=()=>page('fridge');
+function changeFilter(value){filter=value;document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b.dataset.filter===filter);b.setAttribute('aria-pressed',String(b.dataset.filter===filter))});render()}
+document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>changeFilter(b.dataset.filter));$('search').oninput=render;
+function basis(){return $('state').value==='未開封・そのまま'?$('purchase').value:$('changed').value}
+function calcDue(){if(basis()&&$('days').value!==''&&Number.isFinite(Number($('days').value)))$('due').value=plus(basis(),$('days').value)}
+function setStandard(){let name=$('name').value.trim(),s=standards[name+'|'+$('state').value],b=base[resolveFoodName(name)];$('days').value=s??($('state').value==='未開封・そのまま'?b?.days??'':'');$('source').textContent=s!==undefined?'この冷蔵庫で設定した標準日数です。':b&&$('state').value==='未開封・そのまま'?'プレビュー用の仮の日数です。本番では参考元を表示します。':'この食品・状態の日数は未設定です。目安の日数を入力してください。';if($('days').value==='')$('due').value='';else calcDue()}
+function fieldError(id,message){let e=$(id+'-error');e.textContent=message;e.hidden=!message;$(id).setAttribute('aria-invalid',String(!!message))}
+function clearErrors(){['name','purchase','changed','days','due'].forEach(id=>fieldError(id,''))}
+function openEditor(id){editing=id||null;$('form').reset();clearErrors();$('modal-title').textContent=id?'食品を編集':'食品を追加';$('purchase').value=offset(0);$('changed').value=offset(0);$('changed').disabled=true;$('source').textContent='食品を選ぶと目安を設定します。';if(id){let x=items.find(x=>x.id===id);if(!x)return;$('name').value=x.name;$('state').value=x.state;$('purchase').value=x.purchase;$('changed').value=x.changed||offset(0);$('changed').disabled=x.state==='未開封・そのまま';$('due').value=x.due;$('days').value=diff(x.due,basis());$('source').textContent='この食品の目安を変更できます。'}$('editor').showModal()}
+$('add').onclick=()=>openEditor();$('close').onclick=$('cancel').onclick=()=>$('editor').close();$('name').oninput=()=>{fieldError('name','');setStandard()};$('state').onchange=()=>{$('changed').disabled=$('state').value==='未開封・そのまま';$('changed').required=!$('changed').disabled;setStandard()};$('days').oninput=()=>{fieldError('days','');calcDue()};$('purchase').onchange=$('changed').onchange=calcDue;$('due').onchange=()=>{fieldError('due','');if(basis()&&$('due').value)$('days').value=diff($('due').value,basis())};$('catalog').innerHTML=Object.keys(foodDrawings).map(n=>'<option value="'+n+'">').join('');$('chips').innerHTML=['キャベツ','卵','トマト','牛乳'].map(n=>'<button type="button">'+n+'</button>').join('');$('chips').onclick=e=>{if(e.target.tagName==='BUTTON'){$('name').value=e.target.textContent;setStandard()}};
+$('form').onsubmit=e=>{e.preventDefault();clearErrors();let first=null;function fail(id,msg){fieldError(id,msg);if(!first)first=id}let name=$('name').value.trim();if(!name)fail('name','食品名を入力してください。');if(!$('purchase').value)fail('purchase','購入日を入力してください。');if(!$('changed').disabled&&!$('changed').value)fail('changed','開封・カットした日を入力してください。');if($('days').value===''||!Number.isInteger(Number($('days').value))||Number($('days').value)<0||Number($('days').value)>365)fail('days','0〜365の整数で日数を入力してください。');if(!$('due').value)fail('due','目安の日付を入力してください。');if(basis()&&$('due').value&&diff($('due').value,basis())<0)fail('due','基準日以降の日付を指定してください。');if(first){$(first).focus();return}let x={id:editing||(crypto.randomUUID?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint32Array(4)),n=>n.toString(16).padStart(8,'0')).join('')),name,state:$('state').value,purchase:$('purchase').value,changed:$('changed').disabled?null:$('changed').value,due:$('due').value,remaining:editing?(items.find(i=>i.id===editing)?.remaining??1):1};lastRemoved=null;if($('remember').checked||!base[resolveFoodName(name)])standards[name+'|'+x.state]=Number($('days').value);if(editing)items=items.map(i=>i.id===editing?x:i);else items.push(x);persist();render();$('editor').close();savedToast(editing?'変更を保存しました':'食品を追加しました')};
+function openUsage(id){const x=items.find(i=>i.id===id);if(!x)return;usingId=id;$('usage-title').textContent=x.name+'を使う';$('usage-remaining').textContent='今の残り：'+remainingLabel(x);$('usage').showModal()}
+function useFood(mode){const x=items.find(i=>i.id===usingId);if(!x){$('usage').close();return}lastRemoved={...x};if(mode==='half'){items=items.map(i=>i.id===x.id?{...i,remaining:(i.remaining??1)/2,state:i.state==='未開封・そのまま'?'開封済み':i.state,changed:i.changed||offset(0)}:i)}else items=items.filter(i=>i.id!==x.id);persist();render();$('usage').close();savedToast(mode==='half'?x.name+'を半分使いました（残り'+remainingLabel(items.find(i=>i.id===x.id))+'）':x.name+'を使い切りました',true)}
+$('usage-half').onclick=()=>useFood('half');$('usage-all').onclick=()=>useFood('all');$('usage-close').onclick=()=>$('usage').close();
+$('list').onclick=e=>{let edit=e.target.closest('[data-edit]'),use=e.target.closest('[data-use]'),empty=e.target.closest('[data-empty]');if(edit)openEditor(edit.dataset.edit);if(use)openUsage(use.dataset.use);if(empty){if(empty.dataset.empty==='add')openEditor();else{$('search').value='';changeFilter('all')}}};$('undo').onclick=()=>{if(lastRemoved){items=items.filter(x=>x.id!==lastRemoved.id);items.push(lastRemoved);lastRemoved=null;persist();render();savedToast('元に戻しました')}};$('toast-dismiss').onclick=()=>$('toast').hidden=true;$('reset').onclick=()=>$('reset-dialog').showModal();$('reset-cancel').onclick=()=>$('reset-dialog').close();$('reset-confirm').onclick=()=>{standards={};lastRemoved=null;seed();persist();render();$('reset-dialog').close();savedToast('サンプルデータに戻しました')};render();
+
+const themeMedia=matchMedia('(prefers-color-scheme: dark)');let themePreference='system';try{themePreference=localStorage.getItem('fridge-theme')||'system'}catch{}if(!['system','light','dark'].includes(themePreference))themePreference='system';function applyTheme(preference,persistChoice=false){themePreference=preference;const dark=preference==='dark'||preference==='system'&&themeMedia.matches;document.documentElement.dataset.theme=dark?'dark':'light';$('theme-select').value=preference;$('theme-status').textContent=(dark?'ダークモード':'ライトモード')+'で表示中'+(preference==='system'?'（端末設定に連動）':'');$('theme-toggle').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+(dark?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/>':'<path d="M20.5 13a8.5 8.5 0 0 1-9.5-9.5A8.5 8.5 0 1 0 20.5 13Z"/>')+'</svg>';$('theme-toggle').setAttribute('aria-label',dark?'ライトモードに切り替える':'ダークモードに切り替える');$('theme-toggle').title=dark?'ライトモードに切り替える':'ダークモードに切り替える';if(persistChoice){try{localStorage.setItem('fridge-theme',preference)}catch{toast('配色を変更しました。この環境では設定を保存できません。')}}}applyTheme(themePreference);$('theme-select').onchange=e=>applyTheme(e.target.value,true);$('theme-toggle').onclick=()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true);themeMedia.addEventListener('change',()=>{if(themePreference==='system')applyTheme('system')});
+</script><script>
+/* fridge-memo クラウド同期 v2（Supabase RESTを直接使用・外部ライブラリなし）
+   - 個人同期（user_fridge_data）に加え、世帯（household）共有に対応。
+   - 世帯に参加している場合は世帯データを同期先にし、参加していなければ個人データを同期する。
+   - 端末内の localStorage（fridge-ui-v1）は従来通り残し、同期はその写しを合わせるだけ。
+   - ログアウト・同期失敗でも端末内データは消さない。競合は更新が新しい方を優先。
+   - 世帯への初回参加・作成直後は、クラウド側を正として取り込む（手元の初期データで上書きしない）。 */
+(() => {
+  'use strict';
+  const SUPABASE_URL = 'https://fvfldaumhrpdgpcsmfgr.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_QMyn2dVhaD_lkWkTXGP4kA_mlg_Q6NS';
+  const DATA_KEY = 'fridge-ui-v1';
+  const AUTH_KEY = 'fridge-auth-v1';
+  const META_KEY = 'fridge-sync-meta-v1';
+  const PKCE_KEY = 'fridge-pkce-v1';
+  const NATIVE_REDIRECT = 'com.fridgememo.app://login-callback/';
+
+  const statusEl = document.getElementById('sync-status');
+  const authBtn = document.getElementById('sync-auth');
+  const nowBtn = document.getElementById('sync-now');
+  if (!authBtn) return;
+  const hhArea = document.getElementById('household-area');
+  const hhStatus = document.getElementById('hh-status');
+  const hhCreate = document.getElementById('hh-create');
+  const hhJoinWrap = document.getElementById('hh-join-wrap');
+  const hhCode = document.getElementById('hh-code');
+  const hhJoin = document.getElementById('hh-join');
+  const hhInvite = document.getElementById('hh-invite');
+  const hhLeave = document.getElementById('hh-leave');
+
+  const loadJSON = (k, fallback) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? fallback : v; } catch { return fallback; } };
+  const saveJSON = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+  const getSession = () => loadJSON(AUTH_KEY, null);
+  const getMeta = () => Object.assign({
+    remoteUpdatedAt: null, localChangedAt: 0, lastSyncAt: 0,
+    householdId: null, householdName: null, householdRole: null,
+    hRemoteUpdatedAt: null, hLocalChangedAt: 0, hLastSyncAt: 0
+  }, loadJSON(META_KEY, {}));
+  const saveMeta = (m) => saveJSON(META_KEY, m);
+  const inHousehold = () => !!getMeta().householdId;
+  const isNative = () => !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  const setStatus = (msg) => { if (statusEl) statusEl.textContent = msg; };
+  const setHhStatus = (msg) => { if (hhStatus) hhStatus.textContent = msg; };
+  const fmtTime = (ts) => { try { return new Date(ts).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' }); } catch { return ''; } };
+
+  function updateUI() {
+    const s = getSession();
+    if (s && s.access_token) {
+      const m = getMeta();
+      const last = m.householdId ? m.hLastSyncAt : m.lastSyncAt;
+      setStatus('ログイン中: ' + (s.email || '') + (last ? '（最終同期 ' + fmtTime(last) + '）' : ''));
+      authBtn.textContent = 'ログアウト';
+      if (nowBtn) nowBtn.hidden = false;
+      if (hhArea) hhArea.hidden = false;
+    } else {
+      setStatus('未ログインです。データはこの端末内にのみ保存されています。');
+      authBtn.textContent = 'Googleでログイン';
+      if (nowBtn) nowBtn.hidden = true;
+      if (hhArea) hhArea.hidden = true;
+    }
+    refreshHouseholdUI();
+  }
+
+  function refreshHouseholdUI() {
+    if (!hhArea) return;
+    const m = getMeta();
+    const loggedIn = !!getSession();
+    if (!loggedIn) return;
+    if (!m.householdId) {
+      setHhStatus('まだ共有していません。冷蔵庫を作成するか、パートナーからもらった招待コードで参加できます。');
+      if (hhCreate) hhCreate.hidden = false;
+      if (hhJoinWrap) hhJoinWrap.hidden = false;
+      if (hhInvite) hhInvite.hidden = true;
+      if (hhLeave) hhLeave.hidden = true;
+    } else {
+      setHhStatus('「' + (m.householdName || 'ふたりの冷蔵庫') + '」を共有中です。メンバーは下のボタンの操作で確認できます。');
+      if (hhCreate) hhCreate.hidden = true;
+      if (hhJoinWrap) hhJoinWrap.hidden = true;
+      if (hhInvite) hhInvite.hidden = m.householdRole !== 'owner';
+      if (hhLeave) hhLeave.hidden = m.householdRole === 'owner';
+      showMembers();
+    }
+  }
+
+  /* ---------- 認証（v1と同じ: Google OAuth + PKCE） ---------- */
+  const b64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const randomVerifier = () => { const a = new Uint8Array(48); crypto.getRandomValues(a); return b64url(a.buffer); };
+  async function makeChallenge(verifier) {
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
+    return b64url(digest);
+  }
+  function saveSession(res) {
+    const prev = getSession() || {};
+    const s = {
+      access_token: res.access_token,
+      refresh_token: res.refresh_token || prev.refresh_token || null,
+      expires_at: Date.now() + (res.expires_in || 3600) * 1000,
+      user_id: (res.user && res.user.id) || prev.user_id || null,
+      email: (res.user && res.user.email) || prev.email || null
+    };
+    saveJSON(AUTH_KEY, s);
+    return s;
+  }
+  async function tokenRequest(body) {
+    const r = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=' + body.grant_type, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) throw new Error('token ' + r.status);
+    return r.json();
+  }
+  async function ensureToken() {
+    const s = getSession();
+    if (!s) return null;
+    if (s.access_token && s.expires_at && s.expires_at - Date.now() > 60000) return s;
+    if (!s.refresh_token) { localStorage.removeItem(AUTH_KEY); updateUI(); return null; }
+    try { const res = await tokenRequest({ grant_type: 'refresh_token', refresh_token: s.refresh_token }); return saveSession(res); }
+    catch { localStorage.removeItem(AUTH_KEY); updateUI(); return null; }
+  }
+  async function startLogin() {
+    if (!window.crypto || !crypto.subtle) { setStatus('この環境ではログインできません（安全な接続が必要です）。'); return; }
+    const verifier = randomVerifier();
+    const challenge = await makeChallenge(verifier);
+    saveJSON(PKCE_KEY, { verifier: verifier, ts: Date.now() });
+    const redirectTo = isNative() ? NATIVE_REDIRECT : (location.origin + location.pathname);
+    const url = SUPABASE_URL + '/auth/v1/authorize?provider=google'
+      + '&redirect_to=' + encodeURIComponent(redirectTo)
+      + '&code_challenge=' + encodeURIComponent(challenge)
+      + '&code_challenge_method=s256';
+    if (isNative() && window.Capacitor.Plugins && window.Capacitor.Plugins.Browser) {
+      await window.Capacitor.Plugins.Browser.open({ url: url });
+    } else {
+      location.href = url;
+    }
+  }
+  async function handleAuthCode(code) {
+    const pkce = loadJSON(PKCE_KEY, null);
+    if (!pkce || !pkce.verifier) { setStatus('ログインを完了できませんでした。もう一度お試しください。'); return; }
+    try {
+      const res = await tokenRequest({ grant_type: 'pkce', auth_code: code, code_verifier: pkce.verifier });
+      localStorage.removeItem(PKCE_KEY);
+      saveSession(res);
+      updateUI();
+      setStatus('ログインしました。同期を確認しています…');
+      await syncNow();
+    } catch { setStatus('ログインを完了できませんでした。もう一度お試しください。'); }
+  }
+  async function logout() {
+    const s = await ensureToken();
+    if (s) {
+      try { await fetch(SUPABASE_URL + '/auth/v1/logout', { method: 'POST', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + s.access_token } }); } catch {}
+    }
+    localStorage.removeItem(AUTH_KEY);
+    updateUI();
+  }
+
+  /* ---------- 共通API ---------- */
+  const apiHeaders = (s) => ({ 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + s.access_token, 'Content-Type': 'application/json' });
+  const localData = () => { const raw = localStorage.getItem(DATA_KEY); return raw ? JSON.parse(raw) : {}; };
+  let applyingRemote = false;
+  function applyRemoteData(dataObj, m) {
+    const remoteStr = JSON.stringify(dataObj);
+    if (remoteStr === localStorage.getItem(DATA_KEY)) return false;
+    applyingRemote = true;
+    localStorage.setItem(DATA_KEY, remoteStr);
+    saveMeta(m);
+    if (!sessionStorage.getItem('fridge-sync-applied')) {
+      sessionStorage.setItem('fridge-sync-applied', '1');
+      location.reload();
+    } else {
+      sessionStorage.removeItem('fridge-sync-applied');
+      setStatus('クラウドのデータを読み込みました。画面を更新してください。');
+    }
+    return true;
+  }
+
+  /* ---------- 個人同期（v1と同じ） ---------- */
+  async function fetchPersonalRow(s) {
+    const r = await fetch(SUPABASE_URL + '/rest/v1/user_fridge_data?select=data,updated_at&user_id=eq.' + encodeURIComponent(s.user_id), { headers: apiHeaders(s) });
+    if (!r.ok) throw new Error('fetch ' + r.status);
+    const rows = await r.json();
+    return rows && rows.length ? rows[0] : null;
+  }
+  async function uploadPersonal(s) {
+    const r = await fetch(SUPABASE_URL + '/rest/v1/user_fridge_data?on_conflict=user_id', {
+      method: 'POST',
+      headers: Object.assign(apiHeaders(s), { 'Prefer': 'resolution=merge-duplicates,return=representation' }),
+      body: JSON.stringify([{ user_id: s.user_id, data: localData() }])
+    });
+    if (!r.ok) throw new Error('upload ' + r.status);
+    const rows = await r.json();
+    const m = getMeta();
+    if (rows && rows[0] && rows[0].updated_at) m.remoteUpdatedAt = rows[0].updated_at;
+    m.lastSyncAt = Date.now();
+    saveMeta(m);
+    setStatus('同期しました（' + fmtTime(m.lastSyncAt) + '）');
+    updateUI();
+  }
+  async function syncPersonal(s) {
+    const row = await fetchPersonalRow(s);
+    const m = getMeta();
+    if (!row) {
+      if (localStorage.getItem(DATA_KEY)) { await uploadPersonal(s); }
+      else { m.lastSyncAt = Date.now(); saveMeta(m); setStatus('クラウドにデータはまだありません。'); updateUI(); }
+      return;
+    }
+    if (JSON.stringify(row.data) === localStorage.getItem(DATA_KEY)) {
+      m.remoteUpdatedAt = row.updated_at; m.lastSyncAt = Date.now(); saveMeta(m);
+      setStatus('最新の状態です（' + fmtTime(m.lastSyncAt) + '）'); updateUI(); return;
+    }
+    const localDirty = m.localChangedAt > (m.lastSyncAt || 0);
+    const remoteNewer = !m.remoteUpdatedAt || row.updated_at !== m.remoteUpdatedAt;
+    if (!localDirty || (remoteNewer && Date.parse(row.updated_at) > (m.localChangedAt || 0))) {
+      m.remoteUpdatedAt = row.updated_at; m.lastSyncAt = Date.now();
+      applyRemoteData(row.data, m);
+      return;
+    }
+    await uploadPersonal(s);
+  }
+
+  /* ---------- 世帯 ---------- */
+  async function resolveHousehold(s) {
+    const r = await fetch(SUPABASE_URL + '/rest/v1/household_members?select=household_id,role,households(name)&user_id=eq.' + encodeURIComponent(s.user_id) + '&order=joined_at.asc&limit=1', { headers: apiHeaders(s) });
+    if (!r.ok) return; /* テーブル未作成などの間は個人同期にフォールバック */
+    const rows = await r.json();
+    const m = getMeta();
+    if (rows && rows.length) {
+      m.householdId = rows[0].household_id;
+      m.householdRole = rows[0].role;
+      m.householdName = (rows[0].households && rows[0].households.name) || 'ふたりの冷蔵庫';
+    } else if (m.householdId) {
+      /* メンバーから外れた/世帯が消えた場合は個人同期に戻す */
+      m.householdId = null; m.householdName = null; m.householdRole = null;
+      m.hRemoteUpdatedAt = null; m.hLocalChangedAt = 0; m.hLastSyncAt = 0;
+    }
+    saveMeta(m);
+  }
+  async function showMembers() {
+    const s = await ensureToken();
+    const m = getMeta();
+    if (!s || !m.householdId || !hhStatus) return;
+    try {
+      const r = await fetch(SUPABASE_URL + '/rest/v1/household_members?select=email,role&household_id=eq.' + encodeURIComponent(m.householdId) + '&order=joined_at.asc', { headers: apiHeaders(s) });
+      if (!r.ok) return;
+      const rows = await r.json();
+      const names = rows.map(x => x.email || 'メンバー').join('、');
+      setHhStatus('「' + (m.householdName || 'ふたりの冷蔵庫') + '」を共有中です。メンバー: ' + names);
+    } catch {}
+  }
+  async function fetchHouseholdRow(s, hid) {
+    const r = await fetch(SUPABASE_URL + '/rest/v1/household_fridge_data?select=data,updated_at&household_id=eq.' + encodeURIComponent(hid), { headers: apiHeaders(s) });
+    if (!r.ok) throw new Error('fetch ' + r.status);
+    const rows = await r.json();
+    return rows && rows.length ? rows[0] : null;
+  }
+  async function uploadHousehold(s) {
+    const m = getMeta();
+    const r = await fetch(SUPABASE_URL + '/rest/v1/household_fridge_data?on_conflict=household_id', {
+      method: 'POST',
+      headers: Object.assign(apiHeaders(s), { 'Prefer': 'resolution=merge-duplicates,return=representation' }),
+      body: JSON.stringify([{ household_id: m.householdId, data: localData() }])
+    });
+    if (!r.ok) throw new Error('upload ' + r.status);
+    const rows = await r.json();
+    if (rows && rows[0] && rows[0].updated_at) m.hRemoteUpdatedAt = rows[0].updated_at;
+    m.hLastSyncAt = Date.now();
+    saveMeta(m);
+    setStatus('同期しました（' + fmtTime(m.hLastSyncAt) + '）');
+    updateUI();
+  }
+  async function syncHousehold(s) {
+    const m = getMeta();
+    const row = await fetchHouseholdRow(s, m.householdId);
+    if (!row) { await uploadHousehold(s); return; }
+    if (JSON.stringify(row.data) === localStorage.getItem(DATA_KEY)) {
+      m.hRemoteUpdatedAt = row.updated_at; m.hLastSyncAt = Date.now(); saveMeta(m);
+      setStatus('最新の状態です（' + fmtTime(m.hLastSyncAt) + '）'); updateUI(); return;
+    }
+    const firstContact = !m.hLastSyncAt;
+    const localDirty = m.hLocalChangedAt > (m.hLastSyncAt || 0);
+    const remoteNewer = !m.hRemoteUpdatedAt || row.updated_at !== m.hRemoteUpdatedAt;
+    if (firstContact || !localDirty || (remoteNewer && Date.parse(row.updated_at) > (m.hLocalChangedAt || 0))) {
+      m.hRemoteUpdatedAt = row.updated_at; m.hLastSyncAt = Date.now();
+      applyRemoteData(row.data, m);
+      return;
+    }
+    await uploadHousehold(s);
+  }
+  async function createHousehold() {
+    const s = await ensureToken();
+    if (!s) return;
+    try {
+      setHhStatus('冷蔵庫を作成しています…');
+      const r = await fetch(SUPABASE_URL + '/rest/v1/households', {
+        method: 'POST',
+        headers: Object.assign(apiHeaders(s), { 'Prefer': 'return=representation' }),
+        body: JSON.stringify([{ name: 'ふたりの冷蔵庫', owner_id: s.user_id }])
+      });
+      if (!r.ok) throw new Error('household ' + r.status);
+      const hh = (await r.json())[0];
+      const r2 = await fetch(SUPABASE_URL + '/rest/v1/household_members', {
+        method: 'POST', headers: apiHeaders(s),
+        body: JSON.stringify([{ household_id: hh.id, user_id: s.user_id, email: s.email, role: 'owner' }])
+      });
+      if (!r2.ok) throw new Error('member ' + r2.status);
+      /* 初期データ: 個人のクラウドデータがあればそれを、なければ手元のデータを世帯の初期値にする */
+      let seed = null;
+      try { const prow = await fetchPersonalRow(s); if (prow) seed = prow.data; } catch {}
+      if (!seed) seed = localData();
+      const r3 = await fetch(SUPABASE_URL + '/rest/v1/household_fridge_data', {
+        method: 'POST', headers: apiHeaders(s),
+        body: JSON.stringify([{ household_id: hh.id, data: seed }])
+      });
+      if (!r3.ok) throw new Error('seed ' + r3.status);
+      const m = getMeta();
+      m.householdId = hh.id; m.householdName = hh.name; m.householdRole = 'owner';
+      m.hRemoteUpdatedAt = null; m.hLocalChangedAt = 0; m.hLastSyncAt = 0;
+      saveMeta(m);
+      setHhStatus('冷蔵庫を作成しました。「招待コードを発行」して、コードをパートナーに伝えてください。');
+      refreshHouseholdUI();
+      await syncNow();
+    } catch { setHhStatus('作成に失敗しました。時間をおいてもう一度お試しください。'); }
+  }
+  async function issueInvite() {
+    const s = await ensureToken();
+    const m = getMeta();
+    if (!s || !m.householdId) return;
+    try {
+      const chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+      const a = new Uint8Array(6); crypto.getRandomValues(a);
+      const code = [...a].map(x => chars[x % chars.length]).join('');
+      const expires = new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString();
+      const r = await fetch(SUPABASE_URL + '/rest/v1/household_invites', {
+        method: 'POST', headers: apiHeaders(s),
+        body: JSON.stringify([{ code: code, household_id: m.householdId, created_by: s.user_id, expires_at: expires }])
+      });
+      if (!r.ok) throw new Error('invite ' + r.status);
+      setHhStatus('招待コード: ' + code + '（7日間有効・1回だけ使えます）パートナーにこのコードを伝えてください。相手は自分のアカウントでログインし、「コードで参加」から入力します。');
+    } catch { setHhStatus('招待コードの発行に失敗しました。'); }
+  }
+  async function joinHousehold() {
+    const s = await ensureToken();
+    if (!s) return;
+    const code = (hhCode && hhCode.value || '').trim();
+    if (!code) { setHhStatus('招待コードを入力してください。'); return; }
+    try {
+      const r = await fetch(SUPABASE_URL + '/rest/v1/rpc/join_household', {
+        method: 'POST', headers: apiHeaders(s),
+        body: JSON.stringify({ p_code: code })
+      });
+      if (!r.ok) throw new Error('join ' + r.status);
+      const hid = await r.json();
+      const m = getMeta();
+      m.householdId = typeof hid === 'string' ? hid : null;
+      m.hRemoteUpdatedAt = null; m.hLocalChangedAt = 0; m.hLastSyncAt = 0;
+      saveMeta(m);
+      setHhStatus('参加しました。共有データを取り込んでいます…');
+      await syncNow();
+      refreshHouseholdUI();
+    } catch { setHhStatus('参加できませんでした。コードが違うか、期限が切れています。'); }
+  }
+  async function leaveHousehold() {
+    const s = await ensureToken();
+    const m = getMeta();
+    if (!s || !m.householdId) return;
+    try {
+      await fetch(SUPABASE_URL + '/rest/v1/household_members?household_id=eq.' + encodeURIComponent(m.householdId) + '&user_id=eq.' + encodeURIComponent(s.user_id), {
+        method: 'DELETE', headers: apiHeaders(s)
+      });
+      m.householdId = null; m.householdName = null; m.householdRole = null;
+      m.hRemoteUpdatedAt = null; m.hLocalChangedAt = 0; m.hLastSyncAt = 0;
+      saveMeta(m);
+      setHhStatus('共有から抜けました。これ以降は個人の同期に戻ります。');
+      refreshHouseholdUI();
+    } catch { setHhStatus('処理に失敗しました。'); }
+  }
+
+  /* ---------- 同期の入口 ---------- */
+  async function syncNow() {
+    const s = await ensureToken();
+    if (!s) { updateUI(); return; }
+    try {
+      await resolveHousehold(s);
+      if (getMeta().householdId) { await syncHousehold(s); }
+      else { await syncPersonal(s); }
+    } catch { setStatus('同期に失敗しました。通信環境を確認して、もう一度お試しください。'); }
+    updateUI();
+  }
+
+  /* ---------- 既存の保存処理へのフック ---------- */
+  let uploadTimer = null;
+  function scheduleUpload() {
+    if (!getSession()) return;
+    if (uploadTimer) clearTimeout(uploadTimer);
+    uploadTimer = setTimeout(() => { syncNow(); }, 2500);
+  }
+  const origSetItem = Storage.prototype.setItem;
+  Storage.prototype.setItem = function (k, v) {
+    const before = this.getItem(k);
+    origSetItem.call(this, k, v);
+    if (k === DATA_KEY && !applyingRemote && before !== v && this === window.localStorage) {
+      const m = getMeta();
+      if (m.householdId) { m.hLocalChangedAt = Date.now(); } else { m.localChangedAt = Date.now(); }
+      saveMeta(m);
+      scheduleUpload();
+    }
+  };
+
+  /* ---------- イベント ---------- */
+  authBtn.addEventListener('click', () => { if (getSession()) { logout(); } else { startLogin(); } });
+  if (nowBtn) nowBtn.addEventListener('click', () => { syncNow(); });
+  if (hhCreate) hhCreate.addEventListener('click', () => { createHousehold(); });
+  if (hhInvite) hhInvite.addEventListener('click', () => { issueInvite(); });
+  if (hhJoin) hhJoin.addEventListener('click', () => { joinHousehold(); });
+  if (hhLeave) hhLeave.addEventListener('click', () => { leaveHousehold(); });
+
+  if (isNative() && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
+    window.Capacitor.Plugins.App.addListener('appUrlOpen', (event) => {
+      try {
+        const u = new URL(event.url);
+        const code = u.searchParams.get('code');
+        if (code) {
+          if (window.Capacitor.Plugins.Browser) window.Capacitor.Plugins.Browser.close();
+          handleAuthCode(code);
+        }
+      } catch {}
+    });
+  }
+  (function initFromUrl() {
+    const q = new URLSearchParams(location.search);
+    const code = q.get('code');
+    if (code && !isNative()) {
+      history.replaceState(null, '', location.pathname);
+      handleAuthCode(code);
+      return;
+    }
+    if (q.get('error')) { setStatus('ログインがキャンセルされました。'); history.replaceState(null, '', location.pathname); }
+  })();
+
+  updateUI();
+  if (getSession()) { syncNow(); }
+})();
+
+</script></body></html>
