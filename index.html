@@ -41,7 +41,7 @@ body{padding-top:env(safe-area-inset-top,0px)}
 .food-add-plus{width:52px;height:52px;display:grid;place-items:center;border:2px solid var(--control-line);border-radius:50%;background:var(--surface);font-size:26px;line-height:1;font-weight:400}
 .empty .secondary{margin-left:8px}
 .name-combo{position:relative}
-.name-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;max-height:208px;overflow-y:auto;background:var(--surface);border:1px solid var(--control-line);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.14);z-index:40;padding:4px}
+.name-dropdown{margin-top:6px;max-height:208px;overflow-y:auto;background:var(--surface);border:1px solid var(--control-line);border-radius:10px;padding:4px}
 .name-dropdown button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:10px 12px;font-size:14px;border-radius:6px;min-height:44px;color:var(--ink)}
 .name-dropdown button:hover{background:var(--soft)}
 .name-dropdown .dd-empty{padding:10px 12px;font-size:12px;color:var(--muted)}
@@ -140,7 +140,7 @@ function openDropdown(){renderDropdown();$('name-dropdown').hidden=false;$('name
 function closeDropdown(){$('name-dropdown').hidden=true;$('name').setAttribute('aria-expanded','false')}
 function renderCatalog(){if(!$('name-dropdown').hidden)renderDropdown()}
 $('name-dropdown').addEventListener('pointerdown',e=>{let b=e.target.closest('[data-catalog]');if(!b)return;e.preventDefault();$('name').value=b.dataset.catalog;fieldError('name','');setStandard();closeDropdown();$('name').focus()});
-$('name').addEventListener('focus',()=>{openDropdown();setTimeout(()=>$('name').scrollIntoView({block:'start'}),300)});
+$('name').addEventListener('focus',()=>{openDropdown();setTimeout(()=>$('name').scrollIntoView({block:'center'}),300)});
 $('name').addEventListener('blur',()=>setTimeout(closeDropdown,150));
 $('name').addEventListener('keydown',e=>{if(e.key==='Escape')closeDropdown()});
 $('chips').innerHTML=['キャベツ','卵','トマト','牛乳'].map(n=>'<button type="button">'+n+'</button>').join('');$('chips').onclick=e=>{if(e.target.tagName==='BUTTON'){$('name').value=e.target.textContent;setStandard();renderCatalog()}};
