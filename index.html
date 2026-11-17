@@ -36,7 +36,7 @@ body{background:var(--bg)}.main-nav{align-items:center}.theme-toggle{width:44px;
 .condition-crease{stroke:#7c7667;stroke-width:1.15}.condition-crease.over{stroke:#796d64;stroke-width:1.25}.condition-key{display:inline-block;vertical-align:middle;width:18px;height:18px;margin-right:3px;fill:none;stroke:#7c7667;stroke-width:1.25}.condition-key.over{stroke:#796d64;stroke-width:1.45}:root[data-theme=dark] .condition-crease,:root[data-theme=dark] .condition-key{stroke:#c0b6a3}:root[data-theme=dark] .condition-crease.over,:root[data-theme=dark] .condition-key.over{stroke:#c8b4a5}/* ステータスバーとの重なり回避: 端末の上端セーフエリア分だけ全体を下げる（デスクトップでは0） */
 body{padding-top:env(safe-area-inset-top,0px)}
 /* 常時表示の食品追加タイル（冷蔵庫内） */
-.food-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:220px;width:100%;border:0;background:var(--soft);color:var(--secondary);font-size:13px;font-weight:600;padding:16px 8px}
+.food-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:220px;width:100%;border:0;background:transparent;color:var(--secondary);font-size:13px;font-weight:600;padding:16px 8px}
 .food-add:hover{color:var(--ink)}
 .food-add-plus{width:52px;height:52px;display:grid;place-items:center;border:2px solid var(--control-line);border-radius:50%;background:var(--surface);font-size:26px;line-height:1;font-weight:400}
 .empty .secondary{margin-left:8px}
