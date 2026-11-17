@@ -48,7 +48,11 @@ body{padding-top:env(safe-area-inset-top,0px)}
 </style><script>(()=>{let p='system';try{p=localStorage.getItem('fridge-theme')||'system'}catch{}if(!['system','light','dark'].includes(p))p='system';const dark=p==='dark'||p==='system'&&matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=dark?'dark':'light'})();</script><style>
 /* micro-interactions (approved plan, 1.3.11) */
 button{transition:transform .12s ease,background-color .12s ease,border-color .12s ease,color .12s ease}
-button:active{transform:scale(.97)}
+*{-webkit-tap-highlight-color:transparent}
+button:active{transform:scale(.97);background-color:var(--hover)}
+.primary:active{background:var(--strong);border-color:var(--strong)}
+.food-add:active{background:transparent}
+.toast button:active{background:transparent}
 .food-add-plus{transition:transform .15s ease}
 .food-add:active .food-add-plus{transform:scale(.9) rotate(90deg)}
 .name-dropdown button.picked{background:var(--hover)}
