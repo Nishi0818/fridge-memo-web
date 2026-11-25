@@ -2,7 +2,7 @@
 // 方針: ページ本体は network-first（新しい版を優先、オフライン時のみキャッシュ）
 //       静的アセット（manifest・アイコン）は cache-first
 // アセットを大きく変えたら CACHE の版を上げること
-const CACHE = 'fridge-memo-pwa-v1';
+const CACHE = 'fridge-memo-pwa-v2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
